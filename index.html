@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Do You Still Love Me? 💕</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Extra styles specific to this project ── */
+
+    /* Page 1 is the question page */
+    #page1 {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #fce4ec 0%, #f8bbd0 50%, #f48fb1 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .q-wrapper {
+      text-align: center;
+      padding: 3rem 2rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Big decorative tulip at top */
+    .q-tulip {
+      font-size: 5rem;
+      display: block;
+      margin-bottom: 0.5rem;
+      animation: tulipBounce 2s ease-in-out infinite;
+    }
+
+    @keyframes tulipBounce {
+      0%, 100% { transform: translateY(0) rotate(-5deg) scale(1); }
+      40%       { transform: translateY(-14px) rotate(5deg) scale(1.08); }
+      70%       { transform: translateY(-6px) rotate(-3deg) scale(1.04); }
+    }
+
+    /* Cute cartoon bear */
+    .cartoon {
+      font-size: 5.5rem;
+      display: block;
+      margin: 0.5rem 0 1rem;
+      animation: cartoonWiggle 1.8s ease-in-out infinite;
+    }
+
+    @keyframes cartoonWiggle {
+      0%, 100% { transform: rotate(-6deg) scale(1); }
+      25%       { transform: rotate(6deg) scale(1.1); }
+      50%       { transform: rotate(-4deg) scale(1.05); }
+      75%       { transform: rotate(5deg) scale(1.08); }
+    }
+
+    .q-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-style: italic;
+      color: var(--pink-dark);
+      margin-bottom: 2.5rem;
+      line-height: 1.3;
+    }
+
+    /* Button container — uses relative so yes can grow without shifting layout */
+    .q-btn-area {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      min-height: 80px;
+    }
+
+    /* YES button — grows on every NO click */
+    #yesBtn {
+      background: linear-gradient(135deg, var(--pink-deep), var(--pink-mid));
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 0.9rem 2.8rem;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.6rem;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(194,24,91,0.35);
+      transition: font-size 0.4s cubic-bezier(0.34,1.56,0.64,1),
+                  padding 0.4s cubic-bezier(0.34,1.56,0.64,1),
+                  box-shadow 0.3s ease,
+                  transform 0.2s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 32px rgba(194,24,91,0.5);
+    }
+
+    /* NO button — shrinks on every click */
+    #noBtn {
+      background: #fff;
+      color: var(--pink-rose);
+      border: 2px solid var(--pink-rose);
+      border-radius: 50px;
+      padding: 0.9rem 2.8rem;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.6rem;
+      cursor: pointer;
+      transition: font-size 0.3s ease, padding 0.3s ease, opacity 0.3s ease;
+      z-index: 2;
+    }
+
+    #noBtn:hover { background: var(--pink-blush); }
+
+    /* Takeover overlay — YES fills the whole screen */
+    .yes-takeover {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: linear-gradient(135deg, var(--pink-dark), var(--pink-deep), var(--pink-mid));
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .yes-takeover.show { display: flex; }
+
+    .yes-takeover button {
+      background: #fff;
+      color: var(--pink-deep);
+      border: none;
+      border-radius: 50px;
+      padding: 1.5rem 5rem;
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      cursor: pointer;
+      box-shadow: 0 10px 50px rgba(0,0,0,0.3);
+      animation: yesPulse 1.2s ease-in-out infinite;
+      transition: transform 0.2s;
+    }
+
+    .yes-takeover button:hover { transform: scale(1.04); }
+
+    @keyframes yesPulse {
+      0%, 100% { box-shadow: 0 10px 50px rgba(0,0,0,0.3); }
+      50%       { box-shadow: 0 10px 80px rgba(255,255,255,0.45); }
+    }
+
+    .yes-takeover p {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.4rem;
+      color: rgba(255,255,255,0.7);
+      margin-top: 1.5rem;
+      animation: hintPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes hintPulse {
+      0%, 100% { opacity: 0.6; }
+      50%       { opacity: 1; }
+    }
+
+    /* ── PAGE 3 ── */
+    #page3 {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #880e4f 0%, #c2185b 40%, #f48fb1 100%);
+    }
+
+    .p3-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+    }
+
+    .p3-inner {
+      position: relative;
+      max-width: 700px;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    .p3-confetti {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .p3-confetti-dot {
+      position: absolute;
+      border-radius: 50%;
+      animation: confettiFall linear infinite;
+    }
+
+    @keyframes confettiFall {
+      0%   { transform: translateY(-30px) rotate(0); opacity: 1; }
+      100% { transform: translateY(600px) rotate(720deg); opacity: 0; }
+    }
+
+    .p3-tulip {
+      font-size: 5rem;
+      display: block;
+      margin-bottom: 0.5rem;
+      animation: tulipBounce 1.8s ease-in-out infinite;
+    }
+
+    .p3-emoji {
+      font-size: 4.5rem;
+      display: block;
+      margin-bottom: 1rem;
+      animation: heartBeat 1.2s ease-in-out infinite;
+    }
+
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      14%       { transform: scale(1.2); }
+      28%       { transform: scale(1); }
+      42%       { transform: scale(1.13); }
+    }
+
+    .p3-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 7vw, 4.5rem);
+      font-weight: 700;
+      font-style: italic;
+      color: #fff;
+      text-shadow: 0 4px 30px rgba(136,14,79,0.5);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .p3-months {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(3rem, 9vw, 6rem);
+      color: var(--gold);
+      line-height: 1;
+      text-shadow: 0 0 40px rgba(212,175,122,0.6);
+      margin-bottom: 1rem;
+    }
+
+    .p3-sub {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
+      color: #ffe0f0;
+      margin-bottom: 1.5rem;
+    }
+
+    .p3-hearts {
+      font-size: 2rem;
+      letter-spacing: 0.4rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .p3-message {
+      font-family: 'Lato', sans-serif;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.92);
+      line-height: 1.9;
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 1.8rem 2.2rem;
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .p3-sign {
+      display: block;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem;
+      color: var(--gold);
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════════════
+       FLOATING TULIPS (fixed, always visible)
+       ════════════════════════════════════════════════ -->
+  <div class="tulip-float">🌷</div>
+  <div class="tulip-float">🌷</div>
+  <div class="tulip-float">🌷</div>
+  <div class="tulip-float">🌷</div>
+  <div class="tulip-float">🌷</div>
+
+  <!-- ════════════════════════════════════════════════
+       YES TAKEOVER OVERLAY
+       Shows when NO is clicked 6+ times
+       ════════════════════════════════════════════════ -->
+  <div class="yes-takeover" id="yesTakeover">
+    <button id="overlayYesBtn">💕 YES! 💕</button>
+    <p>I knew it 🌷</p>
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════
+       PAGE 1 — The Question
+       ════════════════════════════════════════════════ -->
+  <div id="page1" class="page active">
+    <div class="p1-petals"></div>
+
+    <div class="q-wrapper">
+
+      <!-- Animated tulip icon -->
+      <span class="q-tulip">🌷</span>
+
+      <!-- Cute cartoon emoji -->
+      <span class="cartoon">🥺🐻</span>
+
+      <!-- The question -->
+      <p class="q-title">Do you still love me?</p>
+
+      <!-- Yes / No buttons -->
+      <div class="q-btn-area">
+        <button id="yesBtn">Yes 💕</button>
+        <button id="noBtn">No 🙈</button>
+      </div>
+
+    </div>
+  </div><!-- end page1 -->
+
+
+  <!-- ════════════════════════════════════════════════
+       PAGE 3 — Happy 43rd Monthsary!
+       (Goes straight here when YES is clicked)
+       ════════════════════════════════════════════════ -->
+  <div id="page3" class="page">
+    <div class="p3-section">
+      <div class="p3-inner">
+
+        <!-- Confetti spawned by JS -->
+        <div class="p3-confetti"></div>
+
+        <!-- Tulip & heart -->
+        <span class="p3-tulip">🌷</span>
+        <span class="p3-emoji">💖</span>
+
+        <!-- Main headline -->
+        <h1 class="p3-title">Happy</h1>
+        <div class="p3-months">43rd Monthsary</div>
+        <h1 class="p3-title">My Love 🌷</h1>
+
+        <p class="p3-sub">I love you so much 💕</p>
+
+        <div class="p3-hearts">🌷 💗 🌷 💗 🌷 💗 🌷</div>
+
+        <!-- Message -->
+        <div class="p3-message">
+          Forty-three months of us.<br>
+          Forty-three months of laughing, loving, and growing together.<br>
+          Every single month with you feels like the best one yet.<br><br>
+          I love you so much — more than you know,
+          more than I can say, and more every single day.
+          <span class="p3-sign">Forever yours 🌷</span>
+        </div>
+
+      </div>
+    </div>
+  </div><!-- end page3 -->
+
+
+  <script>
+    /* ============================================================
+       script.js — Love Question Project
+       ============================================================ */
+
+    // ── PAGE SWITCHING ──────────────────────────────────────────
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ── SPAWN FALLING PETALS ON PAGE 1 ─────────────────────────
+    function spawnPetals() {
+      const container = document.querySelector('.p1-petals');
+      if (!container) return;
+      const emojis = ['🌷', '🌸', '💗', '✨', '🌺', '💕'];
+      for (let i = 0; i < 22; i++) {
+        const el = document.createElement('div');
+        el.classList.add('petal');
+        el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        el.style.left = Math.random() * 100 + 'vw';
+        el.style.fontSize = (1 + Math.random() * 1.4) + 'rem';
+        el.style.animationDuration = (6 + Math.random() * 8) + 's';
+        el.style.animationDelay = (Math.random() * 8) + 's';
+        container.appendChild(el);
+      }
+    }
+
+    // ── YES / NO LOGIC ──────────────────────────────────────────
+    let noClicks = 0;    // counts how many times NO was pressed
+
+    function initButtons() {
+      const yesBtn   = document.getElementById('yesBtn');
+      const noBtn    = document.getElementById('noBtn');
+      const overlay  = document.getElementById('yesTakeover');
+      const overYes  = document.getElementById('overlayYesBtn');
+
+      // ── NO button clicked ──
+      noBtn.addEventListener('click', () => {
+        noClicks++;
+
+        // YES grows bigger every click
+        const newYesFont = Math.min(5, 1.6 + noClicks * 0.45);
+        const newYesPadV = 0.9 + noClicks * 0.2;
+        const newYesPadH = 2.8 + noClicks * 0.55;
+        yesBtn.style.fontSize = newYesFont + 'rem';
+        yesBtn.style.padding  = `${newYesPadV}rem ${newYesPadH}rem`;
+
+        // NO shrinks and fades away
+        const newNoFont = Math.max(0.5, 1.6 - noClicks * 0.15);
+        const newNoPadV = Math.max(0.3, 0.9 - noClicks * 0.07);
+        const newNoPadH = Math.max(0.8, 2.8 - noClicks * 0.2);
+        noBtn.style.fontSize = newNoFont + 'rem';
+        noBtn.style.padding  = `${newNoPadV}rem ${newNoPadH}rem`;
+        noBtn.style.opacity  = Math.max(0.2, 1 - noClicks * 0.12);
+
+        // After 6 no-clicks → YES takes over the whole screen
+        if (noClicks >= 6) {
+          overlay.classList.add('show');
+        }
+      });
+
+      // ── YES button clicked (normal size) ──
+      yesBtn.addEventListener('click', () => goToPage3());
+
+      // ── YES button on the takeover overlay ──
+      overYes.addEventListener('click', () => {
+        overlay.classList.remove('show');
+        goToPage3();
+      });
+    }
+
+    // ── GO TO PAGE 3 ─────────────────────────────────────────
+    function goToPage3() {
+      showPage('page3');
+      spawnConfetti();
+    }
+
+    // ── CONFETTI ON PAGE 3 ────────────────────────────────────
+    function spawnConfetti() {
+      const container = document.querySelector('.p3-confetti');
+      if (!container) return;
+      const colors = ['#f48fb1','#f06292','#e91e8c','#fff','#ffe0f0','#d4af7a','#fce4ec'];
+      for (let i = 0; i < 50; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('p3-confetti-dot');
+        const size = 6 + Math.random() * 12;
+        dot.style.width  = size + 'px';
+        dot.style.height = size + 'px';
+        dot.style.left   = Math.random() * 100 + '%';
+        dot.style.top    = (Math.random() * -20) + '%';
+        dot.style.background = colors[Math.floor(Math.random() * colors.length)];
+        dot.style.animationDuration = (3 + Math.random() * 5) + 's';
+        dot.style.animationDelay    = (Math.random() * 4) + 's';
+        container.appendChild(dot);
+      }
+    }
+
+    // ── BOOT ──────────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+      showPage('page1');
+      spawnPetals();
+      initButtons();
+    });
+  </script>
+
+</body>
+</html>
