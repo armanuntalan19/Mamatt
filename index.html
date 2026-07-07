@@ -3,58 +3,57 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Do You Still Love Me?</title>
+  <title>Do You Still Love Me? 💕</title>
+  <link rel="icon" type="image/png" href="icon.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <div id="page1">
+  <!-- ════════════════════════════════════════════════
+       FLOATING TULIPS (fixed, always visible)
+       ════════════════════════════════════════════════ -->
+  <div class="tulip-float">🌷</div>
+  <div class="tulip-float">🌷</div>
+  <div class="tulip-float">🌷</div>
+  <div class="tulip-float">🌷</div>
+  <div class="tulip-float">🌷</div>
+
+  <!-- ════════════════════════════════════════════════
+       YES TAKEOVER OVERLAY
+       Shows when NO is clicked enough times
+       ════════════════════════════════════════════════ -->
+  <div class="yes-takeover" id="yesTakeover">
+    <button id="overlayYesBtn">💕 YES! 💕</button>
+    <p>I knew it 🌷</p>
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       PAGE 1 — The Question
+       ════════════════════════════════════════════════ -->
+  <div id="page1" class="page active">
+    <div class="p1-petals"></div>
+
     <div class="q-wrapper">
 
-      <!-- Replace assets/cute-icon.png with your own icon -->
-      <img class="q-icon" src="assets/cute-icon.png" alt="" />
+      <!-- Minimal icon: the uploaded pleading-pup image -->
+      <img src="icon.png" alt="Pleading pup" class="q-icon" />
 
+      <!-- The question -->
       <p class="q-title">Do you still love me?</p>
 
+      <!-- Yes / No buttons — fixed slots, no layout shift on resize -->
       <div class="q-btn-area">
-        <button id="yesBtn">Yes</button>
-        <button id="noBtn">No</button>
+        <div class="btn-slot">
+          <button id="yesBtn">Yes 💕</button>
+        </div>
+        <div class="btn-slot">
+          <button id="noBtn">No 🙈</button>
+        </div>
       </div>
 
     </div>
-  </div>
+  </div><!-- end page1 -->
 
-  <script>
-    const yesBtn = document.getElementById('yesBtn');
-    const noBtn  = document.getElementById('noBtn');
-
-    let noClicks = 0;
-    const takeoverAt = 6; // how many NO clicks before YES fills the screen
-
-    noBtn.addEventListener('click', () => {
-      if (yesBtn.classList.contains('yes-fullscreen')) return;
-
-      noClicks++;
-
-      if (noClicks >= takeoverAt) {
-        yesBtn.classList.add('yes-fullscreen');
-        noBtn.style.display = 'none';
-        return;
-      }
-
-      // YES only scales up from its own fixed anchor point —
-      // it never shifts position, so NO never has to move either.
-      const scale = 1 + noClicks * 0.28;
-      yesBtn.style.transform = `translate(-50%, -50%) scale(${scale})`;
-
-      // NO gives quiet feedback but stays exactly in place.
-      noBtn.style.opacity = Math.max(0.35, 1 - noClicks * 0.12);
-    });
-
-    yesBtn.addEventListener('click', () => {
-      window.location.href = 'page3.html';
-    });
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>

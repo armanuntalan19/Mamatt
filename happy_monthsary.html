@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy 43rd Monthsary 💖</title>
+  <link rel="icon" type="image/png" href="icon.png" />
+  <link rel="stylesheet" href="page3-style.css" />
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════════════
+       FLOATING TULIPS (fixed, always visible)
+       ════════════════════════════════════════════════ -->
+  <div class="tulip-float">🌷</div>
+  <div class="tulip-float">🌷</div>
+  <div class="tulip-float">🌷</div>
+  <div class="tulip-float">🌷</div>
+  <div class="tulip-float">🌷</div>
+
+  <!-- ════════════════════════════════════════════════
+       PAGE 3 — Happy 43rd Monthsary!
+       ════════════════════════════════════════════════ -->
+  <div id="page3">
+    <div class="p3-inner">
+
+      <!-- Confetti spawned by JS -->
+      <div class="p3-confetti"></div>
+
+      <!-- Tulip & heart -->
+      <span class="p3-tulip">🌷</span>
+      <span class="p3-emoji">💖</span>
+
+      <!-- Main headline -->
+      <h1 class="p3-title">Happy</h1>
+      <div class="p3-months">43rd Monthsary</div>
+      <h1 class="p3-title">My Love 🌷</h1>
+
+      <p class="p3-sub">I love you so much 💕</p>
+
+      <div class="p3-hearts">🌷 💗 🌷 💗 🌷 💗 🌷</div>
+
+      <!-- Message -->
+      <div class="p3-message">
+        Forty-three months of us.<br>
+        Forty-three months of laughing, loving, and growing together.<br>
+        Every single month with you feels like the best one yet.<br><br>
+        I love you so much — more than you know,
+        more than I can say, and more every single day.
+        <span class="p3-sign">Forever yours 🌸</span>
+      </div>
+
+    </div>
+  </div><!-- end page3 -->
+
+  <script>
+    // ── CONFETTI ──────────────────────────────────────────────
+    function spawnConfetti() {
+      const container = document.querySelector('.p3-confetti');
+      if (!container) return;
+      const colors = ['#f48fb1', '#f06292', '#e91e8c', '#fff', '#ffe0f0', '#d4af7a', '#fce4ec'];
+      for (let i = 0; i < 50; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('p3-confetti-dot');
+        const size = 6 + Math.random() * 12;
+        dot.style.width  = size + 'px';
+        dot.style.height = size + 'px';
+        dot.style.left   = Math.random() * 100 + '%';
+        dot.style.top    = (Math.random() * -20) + '%';
+        dot.style.background = colors[Math.floor(Math.random() * colors.length)];
+        dot.style.animationDuration = (3 + Math.random() * 5) + 's';
+        dot.style.animationDelay    = (Math.random() * 4) + 's';
+        container.appendChild(dot);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', spawnConfetti);
+  </script>
+
+</body>
+</html>
