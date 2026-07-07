@@ -140,24 +140,6 @@ html, body {
   margin-bottom: 1.5rem;
 }
 
-.p3-hearts {
-  font-size: 2rem;
-  letter-spacing: 0.4rem;
-  margin-bottom: 1.5rem;
-}
-
-.p3-message {
-  font-family: 'Lato', sans-serif;
-  font-size: 1.1rem;
-  color: rgba(255,255,255,0.92);
-  line-height: 1.9;
-  background: rgba(255,255,255,0.1);
-  border-radius: 20px;
-  padding: 1.8rem 2.2rem;
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255,255,255,0.2);
-}
-
 .p3-sign {
   display: block;
   font-family: 'Dancing Script', cursive;
