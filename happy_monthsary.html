@@ -35,23 +35,20 @@
       <p class="p3-sub">I love you so much 💕</p>
 
   <script>
-    // ── CONFETTI ──────────────────────────────────────────────
+    // ── FALLING FLOWERS (same idea as the index page's petals) ──
     function spawnConfetti() {
       const container = document.querySelector('.p3-confetti');
       if (!container) return;
-      const colors = ['#f48fb1', '#f06292', '#e91e8c', '#fff', '#ffe0f0', '#d4af7a', '#fce4ec'];
-      for (let i = 0; i < 50; i++) {
-        const dot = document.createElement('div');
-        dot.classList.add('p3-confetti-dot');
-        const size = 6 + Math.random() * 12;
-        dot.style.width  = size + 'px';
-        dot.style.height = size + 'px';
-        dot.style.left   = Math.random() * 100 + '%';
-        dot.style.top    = (Math.random() * -20) + '%';
-        dot.style.background = colors[Math.floor(Math.random() * colors.length)];
-        dot.style.animationDuration = (3 + Math.random() * 5) + 's';
-        dot.style.animationDelay    = (Math.random() * 4) + 's';
-        container.appendChild(dot);
+      const emojis = ['🌷', '🌸', '💗', '✨', '🌺', '💕'];
+      for (let i = 0; i < 28; i++) {
+        const petal = document.createElement('div');
+        petal.classList.add('p3-petal');
+        petal.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        petal.style.left = Math.random() * 100 + 'vw';
+        petal.style.fontSize = (1 + Math.random() * 1.4) + 'rem';
+        petal.style.animationDuration = (6 + Math.random() * 8) + 's';
+        petal.style.animationDelay = (Math.random() * 8) + 's';
+        container.appendChild(petal);
       }
     }
 

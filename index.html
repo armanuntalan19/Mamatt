@@ -19,15 +19,6 @@
   <div class="tulip-float">🌷</div>
 
   <!-- ════════════════════════════════════════════════
-       YES TAKEOVER OVERLAY
-       Shows when NO is clicked enough times
-       ════════════════════════════════════════════════ -->
-  <div class="yes-takeover" id="yesTakeover">
-    <button id="overlayYesBtn">💕 YES! 💕</button>
-    <p>I knew it 🌷</p>
-  </div>
-
-  <!-- ════════════════════════════════════════════════
        PAGE 1 — The Question
        ════════════════════════════════════════════════ -->
   <div id="page1" class="page active">
@@ -41,14 +32,11 @@
       <!-- The question -->
       <p class="q-title">Do you still love me?</p>
 
-      <!-- Yes / No buttons — fixed slots, no layout shift on resize -->
-      <div class="q-btn-area">
-        <div class="btn-slot">
-          <button id="yesBtn">Yes 💕</button>
-        </div>
-        <div class="btn-slot">
-          <button id="noBtn">No 🙈</button>
-        </div>
+      <!-- Yes / No buttons — free-flowing, YES grows for real and the
+           layout adapts around it as NO gets clicked -->
+      <div class="q-btn-area" id="btnArea">
+        <button id="yesBtn">Yes 💕</button>
+        <button id="noBtn">No 🙈</button>
       </div>
 
     </div>

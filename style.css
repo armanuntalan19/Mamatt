@@ -128,29 +128,23 @@ body {
 }
 
 /* ===== BUTTON AREA =====
-   Buttons sit in fixed slots that never resize or reflow.
-   Growth/shrink happens purely via CSS transform: scale(),
-   which is visual-only and does not affect layout — so the
-   NO button never moves and stays easy to click quickly. */
+   Buttons live in normal flow (no fixed slots, no absolute
+   positioning). As NO gets clicked, YES really grows (padding/
+   font-size, not just transform) so the layout genuinely adapts
+   around it — NO gets pushed, shrinks and fades, and everything
+   re-centers naturally, right up until YES takes over the whole
+   page. */
 .q-btn-area {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 3rem;
+  gap: 2rem;
   min-height: 140px;
 }
 
-.btn-slot {
-  position: relative;
-  width: 160px;
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* YES button — grows in place via transform, never shifts layout */
+/* YES button — grows for real, in normal document flow */
 #yesBtn {
   background: linear-gradient(135deg, var(--pink-deep), var(--pink-mid));
   color: #fff;
@@ -161,20 +155,18 @@ body {
   font-size: 1.5rem;
   cursor: pointer;
   box-shadow: 0 6px 20px rgba(194,24,91,0.35);
-  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1),
+  transition: padding 0.45s cubic-bezier(0.34,1.56,0.64,1),
+              font-size 0.45s cubic-bezier(0.34,1.56,0.64,1),
+              border-radius 0.45s ease,
               box-shadow 0.3s ease;
-  position: absolute;
-  z-index: 1;
   white-space: nowrap;
-  transform: scale(1);
-  transform-origin: center;
 }
 
 #yesBtn:hover {
   box-shadow: 0 10px 32px rgba(194,24,91,0.5);
 }
 
-/* NO button — always on top, always in the same spot, shrinks slightly via transform */
+/* NO button — shrinks, fades, and gets nudged aside as YES grows */
 #noBtn {
   background: #fff;
   color: var(--pink-rose);
@@ -184,67 +176,44 @@ body {
   font-family: 'Dancing Script', cursive;
   font-size: 1.5rem;
   cursor: pointer;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  position: absolute;
-  z-index: 2;
+  transition: transform 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
   white-space: nowrap;
-  transform: scale(1);
   transform-origin: center;
 }
 
 #noBtn:hover { background: var(--pink-blush); }
 
-/* Takeover overlay — YES fills the whole screen after enough NO clicks */
-.yes-takeover {
-  display: none;
+/* Applied by JS right before the FLIP-to-fullscreen animation runs,
+   so YES can go from "wherever it sits in the flow" to covering the
+   whole page smoothly, without a jump. */
+#yesBtn.yes-expanding {
   position: fixed;
-  inset: 0;
   z-index: 99999;
-  background: linear-gradient(135deg, var(--pink-dark), var(--pink-deep), var(--pink-mid));
+  transition: top 0.7s cubic-bezier(0.34,1.2,0.4,1),
+              left 0.7s cubic-bezier(0.34,1.2,0.4,1),
+              width 0.7s cubic-bezier(0.34,1.2,0.4,1),
+              height 0.7s cubic-bezier(0.34,1.2,0.4,1),
+              border-radius 0.6s ease,
+              font-size 0.7s ease;
+  display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
 }
 
-.yes-takeover.show { display: flex; }
-
-.yes-takeover button {
-  background: #fff;
-  color: var(--pink-deep);
-  border: none;
-  border-radius: 50px;
-  padding: 1.5rem 5rem;
-  font-family: 'Dancing Script', cursive;
-  font-size: clamp(2.5rem, 8vw, 5rem);
-  cursor: pointer;
-  box-shadow: 0 10px 50px rgba(0,0,0,0.3);
-  animation: yesPulse 1.2s ease-in-out infinite;
-  transition: transform 0.2s;
+#yesBtn.yes-fullscreen {
+  border-radius: 0;
+  font-size: clamp(3rem, 12vw, 7rem);
+  background: linear-gradient(135deg, var(--pink-dark), var(--pink-deep), var(--pink-mid));
+  animation: yesPulse 1.4s ease-in-out infinite;
 }
-
-.yes-takeover button:hover { transform: scale(1.04); }
 
 @keyframes yesPulse {
   0%, 100% { box-shadow: 0 10px 50px rgba(0,0,0,0.3); }
-  50%       { box-shadow: 0 10px 80px rgba(255,255,255,0.45); }
-}
-
-.yes-takeover p {
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.4rem;
-  color: rgba(255,255,255,0.7);
-  margin-top: 1.5rem;
-  animation: hintPulse 2s ease-in-out infinite;
-}
-
-@keyframes hintPulse {
-  0%, 100% { opacity: 0.6; }
-  50%       { opacity: 1; }
+  50%       { box-shadow: 0 10px 90px rgba(255,255,255,0.45); }
 }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 480px) {
   .q-icon { width: 96px; height: 96px; }
-  .q-btn-area { gap: 1.5rem; }
-  .btn-slot { width: 130px; }
+  .q-btn-area { gap: 1.2rem; }
 }

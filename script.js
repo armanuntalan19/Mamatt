@@ -20,39 +20,75 @@ function spawnPetals() {
 }
 
 // ── YES / NO LOGIC ───────────────────────────────────────────
-// NO clicks only ever change `transform: scale()`, which is a purely
-// visual change that doesn't affect layout — so neither button ever
-// moves position. The user can keep clicking NO in the exact same
-// spot while YES visibly grows next to it.
+// Every NO click makes YES genuinely bigger (real padding/font-size,
+// not just a transform), so the layout adapts around it — nothing is
+// pinned in place. Keep clicking NO and YES keeps swelling until, on
+// the final click, it smoothly expands (FLIP animation) to cover the
+// entire screen.
 let noClicks = 0;
-const MAX_NO_CLICKS = 6; // after this many, YES takes over the screen
+const MAX_NO_CLICKS = 9; // number of NO clicks needed before YES takes the whole page
 
 function initButtons() {
-  const yesBtn  = document.getElementById('yesBtn');
-  const noBtn   = document.getElementById('noBtn');
-  const overlay = document.getElementById('yesTakeover');
-  const overYes = document.getElementById('overlayYesBtn');
+  const yesBtn = document.getElementById('yesBtn');
+  const noBtn  = document.getElementById('noBtn');
 
   noBtn.addEventListener('click', () => {
+    if (noClicks >= MAX_NO_CLICKS) return;
     noClicks++;
 
-    // YES grows in place (no reflow, no movement)
-    const yesScale = Math.min(3.2, 1 + noClicks * 0.4);
-    yesBtn.style.transform = `scale(${yesScale})`;
+    const progress = noClicks / MAX_NO_CLICKS; // 0 → 1
 
-    // NO shrinks in place and fades, but stays exactly where it was
-    const noScale = Math.max(0.35, 1 - noClicks * 0.12);
-    noBtn.style.transform = `scale(${noScale})`;
-    noBtn.style.opacity   = Math.max(0.25, 1 - noClicks * 0.12);
+    if (noClicks < MAX_NO_CLICKS) {
+      // Real size growth, in normal flow — layout reflows as it grows
+      const fontSize   = 1.5 + progress * 5.5;      // 1.5rem → ~7rem
+      const padY       = 0.9 + progress * 2.4;      // rem
+      const padX       = 2.4 + progress * 6.5;      // rem
+      yesBtn.style.fontSize = fontSize + 'rem';
+      yesBtn.style.padding  = `${padY}rem ${padX}rem`;
 
-    // After enough NO clicks → YES takes over the whole screen
+      // NO shrinks, fades, and (because it's in normal flow) gets
+      // naturally nudged aside as its neighbor swells
+      const noScale = Math.max(0.3, 1 - noClicks * 0.1);
+      const noPad   = Math.max(0.3, 0.9 - noClicks * 0.08);
+      noBtn.style.transform = `scale(${noScale})`;
+      noBtn.style.opacity   = Math.max(0.15, 1 - noClicks * 0.11);
+      noBtn.style.padding   = `${noPad}rem ${noPad + 1.5}rem`;
+    }
+
+    // Final click → smoothly expand YES to fill the whole page
     if (noClicks >= MAX_NO_CLICKS) {
-      overlay.classList.add('show');
+      noBtn.style.pointerEvents = 'none';
+      noBtn.style.opacity = '0';
+      expandYesToFullscreen(yesBtn);
     }
   });
 
   yesBtn.addEventListener('click', goToPage3);
-  overYes.addEventListener('click', goToPage3);
+}
+
+// ── FLIP ANIMATION: grow YES from wherever it sits into a fullscreen takeover ──
+function expandYesToFullscreen(yesBtn) {
+  const rect = yesBtn.getBoundingClientRect();
+
+  // Lock its current on-screen position/size first (no visual jump)
+  yesBtn.classList.add('yes-expanding');
+  yesBtn.style.top    = rect.top + 'px';
+  yesBtn.style.left   = rect.left + 'px';
+  yesBtn.style.width  = rect.width + 'px';
+  yesBtn.style.height = rect.height + 'px';
+  yesBtn.style.margin = '0';
+
+  // Force a reflow so the browser registers the starting position
+  // before we animate to the fullscreen end-state
+  void yesBtn.offsetWidth;
+
+  requestAnimationFrame(() => {
+    yesBtn.classList.add('yes-fullscreen');
+    yesBtn.style.top    = '0';
+    yesBtn.style.left   = '0';
+    yesBtn.style.width  = '100vw';
+    yesBtn.style.height = '100vh';
+  });
 }
 
 // ── GO TO PAGE 3 (separate html/css, own file) ──────────────
