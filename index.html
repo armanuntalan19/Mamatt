@@ -24,33 +24,20 @@
       margin: 0 auto;
     }
 
-    /* Big decorative tulip at top */
-    .q-tulip {
-      font-size: 5rem;
+    /* Single cute icon at top (replaces the old tulip + bear pair) */
+    .q-cute-icon {
+      width: 6rem;
+      height: 6rem;
       display: block;
-      margin-bottom: 0.5rem;
-      animation: tulipBounce 2s ease-in-out infinite;
+      margin: 0 auto 1rem;
+      animation: cuteBounce 2s ease-in-out infinite;
+      filter: drop-shadow(0 6px 14px rgba(194,24,91,0.35));
     }
 
-    @keyframes tulipBounce {
+    @keyframes cuteBounce {
       0%, 100% { transform: translateY(0) rotate(-5deg) scale(1); }
       40%       { transform: translateY(-14px) rotate(5deg) scale(1.08); }
       70%       { transform: translateY(-6px) rotate(-3deg) scale(1.04); }
-    }
-
-    /* Cute cartoon bear */
-    .cartoon {
-      font-size: 5.5rem;
-      display: block;
-      margin: 0.5rem 0 1rem;
-      animation: cartoonWiggle 1.8s ease-in-out infinite;
-    }
-
-    @keyframes cartoonWiggle {
-      0%, 100% { transform: rotate(-6deg) scale(1); }
-      25%       { transform: rotate(6deg) scale(1.1); }
-      50%       { transform: rotate(-4deg) scale(1.05); }
-      75%       { transform: rotate(5deg) scale(1.08); }
     }
 
     .q-title {
@@ -97,6 +84,23 @@
       box-shadow: 0 10px 32px rgba(194,24,91,0.5);
     }
 
+    /* YES button takeover — once NO has been clicked enough times,
+       YES grows to completely fill the screen */
+    #yesBtn.yes-fullscreen {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      border-radius: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(3rem, 14vw, 9rem);
+      padding: 0;
+      z-index: 999;
+      transition: font-size 0.5s cubic-bezier(0.34,1.56,0.64,1);
+    }
+
     /* NO button — shrinks on every click */
     #noBtn {
       background: #fff;
@@ -112,38 +116,6 @@
     }
 
     #noBtn:hover { background: var(--pink-blush); }
-
-    /* Giant decorative YES badge shown on the celebration page */
-    .p3-yes-badge {
-      display: inline-block;
-      background: #fff;
-      color: var(--pink-deep);
-      border-radius: 50px;
-      padding: 1.1rem 3.5rem;
-      font-family: 'Dancing Script', cursive;
-      font-size: clamp(2rem, 6vw, 3.6rem);
-      box-shadow: 0 10px 50px rgba(0,0,0,0.3);
-      animation: yesPulse 1.2s ease-in-out infinite;
-      margin-bottom: 0.8rem;
-    }
-
-    @keyframes yesPulse {
-      0%, 100% { box-shadow: 0 10px 50px rgba(0,0,0,0.3); }
-      50%       { box-shadow: 0 10px 80px rgba(255,255,255,0.45); }
-    }
-
-    .p3-hint {
-      font-family: 'Dancing Script', cursive;
-      font-size: 1.4rem;
-      color: rgba(255,255,255,0.75);
-      margin-bottom: 1.5rem;
-      animation: hintPulse 2s ease-in-out infinite;
-    }
-
-    @keyframes hintPulse {
-      0%, 100% { opacity: 0.6; }
-      50%       { opacity: 1; }
-    }
 
     /* ── PAGE 3 ── */
     #page3 {
@@ -278,11 +250,8 @@
 
     <div class="q-wrapper">
 
-      <!-- Animated cherry blossom icon -->
-      <span class="q-tulip">🌸</span>
-
-      <!-- Cute cartoon emoji -->
-      <span class="cartoon">🧸🎀</span>
+      <!-- Cute icon -->
+      <img class="q-cute-icon" src="assets/cute-icon.svg" alt="cute icon" />
 
       <!-- The question -->
       <p class="q-title">Do you still love me?</p>
@@ -311,10 +280,6 @@
         <!-- Cute icons -->
         <span class="p3-tulip">🧸</span>
         <span class="p3-emoji">💖</span>
-
-        <!-- Giant YES badge + hint -->
-        <div class="p3-yes-badge">💕 YES! 💕</div>
-        <p class="p3-hint">I knew it 🌸</p>
 
         <!-- Main headline -->
         <h1 class="p3-title">Happy</h1>
@@ -378,30 +343,40 @@
 
       // ── NO button clicked ──
       noBtn.addEventListener('click', () => {
+        // Once YES has already taken over the whole screen, NO can no
+        // longer be interacted with — nothing left to do here.
+        if (yesBtn.classList.contains('yes-fullscreen')) return;
+
         noClicks++;
 
+        // How many NO clicks it takes before YES fully takes over the screen
+        const takeoverAt = 6;
+
+        if (noClicks >= takeoverAt) {
+          // YES now completely fills the screen. No auto-redirect happens —
+          // she still has to actually tap YES to see the celebration page.
+          yesBtn.classList.add('yes-fullscreen');
+          noBtn.style.display = 'none';
+          return;
+        }
+
         // YES grows bigger every click, taking over more of the screen
-        const newYesFont = 1.6 + noClicks * 1.1;
-        const newYesPadV  = 0.9 + noClicks * 0.5;
-        const newYesPadH  = 2.8 + noClicks * 1.3;
+        const newYesFont = 1.6 + noClicks * 1.6;
+        const newYesPadV  = 0.9 + noClicks * 0.7;
+        const newYesPadH  = 2.8 + noClicks * 1.8;
         yesBtn.style.fontSize = newYesFont + 'rem';
         yesBtn.style.padding  = `${newYesPadV}rem ${newYesPadH}rem`;
 
         // NO shrinks and fades away
-        const newNoFont = Math.max(0.5, 1.6 - noClicks * 0.15);
-        const newNoPadV = Math.max(0.3, 0.9 - noClicks * 0.07);
-        const newNoPadH = Math.max(0.8, 2.8 - noClicks * 0.2);
+        const newNoFont = Math.max(0.5, 1.6 - noClicks * 0.2);
+        const newNoPadV = Math.max(0.25, 0.9 - noClicks * 0.1);
+        const newNoPadH = Math.max(0.6, 2.8 - noClicks * 0.35);
         noBtn.style.fontSize = newNoFont + 'rem';
         noBtn.style.padding  = `${newNoPadV}rem ${newNoPadH}rem`;
-        noBtn.style.opacity  = Math.max(0.2, 1 - noClicks * 0.12);
-
-        // After 6 no-clicks → YES has grown to fill the screen, go straight to the celebration page
-        if (noClicks >= 6) {
-          goToPage3();
-        }
+        noBtn.style.opacity  = Math.max(0.15, 1 - noClicks * 0.15);
       });
 
-      // ── YES button clicked at any point → same celebration page ──
+      // ── YES button clicked at any point → celebration page ──
       yesBtn.addEventListener('click', () => goToPage3());
     }
 
