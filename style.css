@@ -211,14 +211,6 @@ body {
   background: var(--blush);
 }
 
-.tally {
-  margin-top: 1.6rem;
-  font-family: 'Work Sans', sans-serif;
-  font-size: 0.9rem;
-  color: var(--plum);
-  opacity: 0.75;
-}
-
 /* ===== RESPONSIVE ===== */
 @media (max-width: 480px) {
   .portrait { width: 88px; height: 88px; }
