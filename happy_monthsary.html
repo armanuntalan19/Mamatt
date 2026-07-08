@@ -3,57 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy 43rd Monthsary 💖</title>
+  <title>Happy 43rd Monthsary</title>
   <link rel="icon" type="image/png" href="icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="confetti.css" />
   <link rel="stylesheet" href="page3-style.css" />
 </head>
 <body>
 
-  <!-- ════════════════════════════════════════════════
-       FLOATING TULIPS (fixed, always visible)
-       ════════════════════════════════════════════════ -->
-  <div class="tulip-float">🌷</div>
-  <div class="tulip-float">🌷</div>
-  <div class="tulip-float">🌷</div>
-  <div class="tulip-float">🌷</div>
-  <div class="tulip-float">🌷</div>
+  <!-- Same falling-tulip effect as the question page -->
+  <div class="tulip-confetti-field" id="confettiField"></div>
 
-  <!-- ════════════════════════════════════════════════
-       PAGE 3 — Happy 43rd Monthsary!
-       ════════════════════════════════════════════════ -->
-  <div id="page3">
+  <div class="tulip-float tf-1" aria-hidden="true"></div>
+  <div class="tulip-float tf-2" aria-hidden="true"></div>
+  <div class="tulip-float tf-3" aria-hidden="true"></div>
+  <div class="tulip-float tf-4" aria-hidden="true"></div>
+
+  <main id="page3">
     <div class="p3-inner">
 
-      <!-- Confetti spawned by JS -->
-      <div class="p3-confetti"></div>
+      <div class="bouquet" aria-hidden="true" id="bouquet"></div>
 
-      <!-- Main headline -->
+      <p class="p3-eyebrow">every month, still tulips</p>
       <h1 class="p3-title">Happy</h1>
       <div class="p3-months">43rd Monthsary</div>
       <h1 class="p3-title">My Love</h1>
 
-      <p class="p3-sub">I love you so much 💕</p>
+      <p class="p3-sub">I love you so much, today and every month after.</p>
+    </div>
+  </main>
 
-  <script>
-    // ── FALLING FLOWERS (same idea as the index page's petals) ──
-    function spawnConfetti() {
-      const container = document.querySelector('.p3-confetti');
-      if (!container) return;
-      const emojis = ['🌷', '🌸', '💗', '✨', '🌺', '💕'];
-      for (let i = 0; i < 28; i++) {
-        const petal = document.createElement('div');
-        petal.classList.add('p3-petal');
-        petal.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-        petal.style.left = Math.random() * 100 + 'vw';
-        petal.style.fontSize = (1 + Math.random() * 1.4) + 'rem';
-        petal.style.animationDuration = (6 + Math.random() * 8) + 's';
-        petal.style.animationDelay = (Math.random() * 8) + 's';
-        container.appendChild(petal);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', spawnConfetti);
-  </script>
-
+  <script src="confetti.js"></script>
+  <script src="page3-script.js"></script>
 </body>
 </html>

@@ -1,12 +1,9 @@
 /* ============================================================
    style.css — "Do You Still Love Me?" question page
-   Standalone project, separate from the anniversary page.
    ============================================================ */
 
-/* ===== IMPORTS ===== */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400;700&family=Dancing+Script:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400;1,600&family=Caveat:wght@500;700&family=Work+Sans:wght@400;500;600&display=swap');
 
-/* ===== RESET & BASE ===== */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -14,206 +11,218 @@
 }
 
 :root {
-  --pink-deep:    #c2185b;
-  --pink-mid:     #e91e8c;
-  --pink-soft:    #f48fb1;
-  --pink-blush:   #fce4ec;
-  --pink-pale:    #fff0f6;
-  --pink-rose:    #f06292;
-  --pink-dark:    #880e4f;
-  --white:        #ffffff;
-  --text-dark:    #4a1030;
-  --text-mid:     #7b2d52;
-  --gold:         #d4af7a;
+  --ink:     #2b1320;
+  --plum:    #6a1f4d;
+  --crimson: #d81159;
+  --coral:   #ef6351;
+  --gold:    #c9922e;
+  --leaf:    #3a6b4c;
+  --blush:   #f7e6e6;
+  --cream:   #fffaf5;
 }
 
 html, body {
   overflow-x: hidden;
-  font-family: 'Lato', sans-serif;
-  color: var(--text-dark);
+  font-family: 'Work Sans', sans-serif;
+  color: var(--ink);
   height: 100%;
 }
 
 body {
   min-height: 100vh;
+  overflow-y: auto;
 }
 
-/* ===== FLOATING TULIPS ===== */
+/* ===== AMBIENT CORNER TULIPS ===== */
 .tulip-float {
   position: fixed;
   pointer-events: none;
-  z-index: 10;
-  font-size: 2rem;
+  z-index: 2;
+  width: 46px;
+  opacity: 0.55;
   animation: tulipDrift 6s ease-in-out infinite;
-  user-select: none;
-  opacity: 0.9;
 }
-.tulip-float:nth-child(1) { top: 5%; left: 3%;  animation-delay: 0s;   animation-duration: 5s; }
-.tulip-float:nth-child(2) { top: 10%; right: 4%; animation-delay: 1s;   animation-duration: 7s; }
-.tulip-float:nth-child(3) { top: 50%; left: 1%;  animation-delay: 2s;   animation-duration: 6s; }
-.tulip-float:nth-child(4) { top: 75%; right: 2%; animation-delay: 0.5s; animation-duration: 8s; }
-.tulip-float:nth-child(5) { top: 88%; left: 5%;  animation-delay: 3s;   animation-duration: 5.5s; }
+.tulip-float svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.tf-1 { top: 6%;  left: 3%;  animation-delay: 0s;   animation-duration: 5.5s; }
+.tf-2 { top: 12%; right: 4%; animation-delay: 1s;   animation-duration: 7s;   width: 36px; }
+.tf-3 { bottom: 10%; left: 4%; animation-delay: 2s; animation-duration: 6.2s; width: 40px; }
+.tf-4 { bottom: 6%; right: 5%; animation-delay: 0.6s; animation-duration: 6.8s; width: 34px; }
 
 @keyframes tulipDrift {
-  0%   { transform: translateY(0px) rotate(-8deg) scale(1); }
-  30%  { transform: translateY(-14px) rotate(4deg) scale(1.08); }
-  60%  { transform: translateY(-6px) rotate(-4deg) scale(1.03); }
-  100% { transform: translateY(0px) rotate(-8deg) scale(1); }
+  0%   { transform: translateY(0px) rotate(-6deg); }
+  30%  { transform: translateY(-12px) rotate(4deg); }
+  60%  { transform: translateY(-4px) rotate(-3deg); }
+  100% { transform: translateY(0px) rotate(-6deg); }
 }
 
-/* ===== QUESTION PAGE ===== */
-#page1 {
+/* ===== STAGE ===== */
+.stage {
   min-height: 100vh;
-  background: linear-gradient(160deg, #fce4ec 0%, #f8bbd0 50%, #f48fb1 100%);
+  background:
+    radial-gradient(120% 90% at 50% -10%, #fdf1ea 0%, transparent 55%),
+    linear-gradient(165deg, var(--blush) 0%, #f3d3d6 45%, #e9b8c3 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  overflow: hidden;
+  padding: 3rem 1.25rem;
 }
 
-.p1-petals {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.petal {
-  position: absolute;
-  font-size: 1.6rem;
-  opacity: 0.35;
-  animation: petalFall linear infinite;
-}
-
-@keyframes petalFall {
-  0%   { transform: translateY(-60px) rotate(0deg); opacity: 0; }
-  10%  { opacity: 0.35; }
-  90%  { opacity: 0.25; }
-  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-}
-
-.q-wrapper {
+/* ===== CARD ===== */
+.card {
   position: relative;
   z-index: 2;
   text-align: center;
-  padding: 3rem 2rem;
-  max-width: 600px;
+  max-width: 560px;
+  width: 100%;
   margin: 0 auto;
+  background: rgba(255, 250, 245, 0.72);
+  border: 1px solid rgba(106, 31, 77, 0.12);
+  border-radius: 32px;
+  padding: 2.75rem 2.25rem 2.5rem;
+  box-shadow: 0 30px 70px -25px rgba(106, 31, 77, 0.35);
+  backdrop-filter: blur(6px);
 }
 
-/* Minimal decorative icon — the uploaded pleading-pup image */
-.q-icon {
-  width: 128px;
-  height: 128px;
+.bouquet {
+  width: 120px;
+  height: 84px;
+  margin: 0 auto 0.5rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+}
+.bouquet svg { display: block; }
+
+.portrait {
+  width: 108px;
+  height: 108px;
   object-fit: contain;
   display: block;
-  margin: 0 auto 1.25rem;
-  filter: drop-shadow(0 10px 20px rgba(136, 14, 79, 0.25));
-  animation: iconBob 2.4s ease-in-out infinite;
+  margin: 0 auto 1.1rem;
+  padding: 6px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 3px solid var(--gold);
+  box-shadow: 0 12px 26px rgba(106, 31, 77, 0.28);
+  animation: portraitBob 2.6s ease-in-out infinite;
 }
 
-@keyframes iconBob {
-  0%, 100% { transform: translateY(0) rotate(-2deg); }
-  50%       { transform: translateY(-8px) rotate(2deg); }
+@keyframes portraitBob {
+  0%, 100% { transform: translateY(0) rotate(-1.5deg); }
+  50%       { transform: translateY(-7px) rotate(1.5deg); }
 }
 
-.q-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.8rem, 5vw, 3rem);
+.eyebrow {
+  font-family: 'Caveat', cursive;
+  font-size: 1.35rem;
+  color: var(--crimson);
+  letter-spacing: 0.01em;
+  margin-bottom: 0.35rem;
+}
+
+.title {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: clamp(2rem, 6vw, 3rem);
+  color: var(--plum);
+  line-height: 1.22;
+  margin-bottom: 2.1rem;
+}
+.title em {
   font-style: italic;
-  color: var(--pink-dark);
-  margin-bottom: 2.5rem;
-  line-height: 1.3;
+  color: var(--crimson);
 }
 
-/* ===== BUTTON AREA =====
-   Buttons live in normal flow (no fixed slots, no absolute
-   positioning). As NO gets clicked, YES really grows (padding/
-   font-size, not just transform) so the layout genuinely adapts
-   around it — NO gets pushed, shrinks and fades, and everything
-   re-centers naturally, right up until YES takes over the whole
-   page. */
-.q-btn-area {
+/* ===== BUTTONS =====
+   YES is fixed and centered on the viewport from the very first
+   render. Every NO click grows it by the same continuous formula
+   (see script.js) — there is no special-cased "jump" at a fixed
+   click count. It simply keeps swelling, the longer NO is clicked,
+   until it genuinely fills the screen. */
+.btn-field {
   position: relative;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+  min-height: 70px;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-  min-height: 140px;
 }
 
-/* YES button — grows for real, in normal document flow */
-#yesBtn {
-  background: linear-gradient(135deg, var(--pink-deep), var(--pink-mid));
-  color: #fff;
+.btn {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 600;
   border: none;
-  border-radius: 50px;
-  padding: 0.9rem 2.4rem;
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.5rem;
   cursor: pointer;
-  box-shadow: 0 6px 20px rgba(194,24,91,0.35);
-  transition: padding 0.45s cubic-bezier(0.34,1.56,0.64,1),
-              font-size 0.45s cubic-bezier(0.34,1.56,0.64,1),
-              border-radius 0.45s ease,
-              box-shadow 0.3s ease;
   white-space: nowrap;
 }
 
-#yesBtn:hover {
-  box-shadow: 0 10px 32px rgba(194,24,91,0.5);
-}
-
-/* NO button — shrinks, fades, and gets nudged aside as YES grows */
-#noBtn {
-  background: #fff;
-  color: var(--pink-rose);
-  border: 2px solid var(--pink-rose);
-  border-radius: 50px;
-  padding: 0.9rem 2.4rem;
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: transform 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
-  white-space: nowrap;
-  transform-origin: center;
-}
-
-#noBtn:hover { background: var(--pink-blush); }
-
-/* Applied by JS right before the FLIP-to-fullscreen animation runs,
-   so YES can go from "wherever it sits in the flow" to covering the
-   whole page smoothly, without a jump. */
-#yesBtn.yes-expanding {
+#yesBtn {
   position: fixed;
-  z-index: 99999;
-  transition: top 0.7s cubic-bezier(0.34,1.2,0.4,1),
-              left 0.7s cubic-bezier(0.34,1.2,0.4,1),
-              width 0.7s cubic-bezier(0.34,1.2,0.4,1),
-              height 0.7s cubic-bezier(0.34,1.2,0.4,1),
-              border-radius 0.6s ease,
-              font-size 0.7s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+  color: #fff;
+  background: linear-gradient(135deg, var(--plum), var(--crimson) 55%, var(--coral));
+  border-radius: 60px;
+  padding: 0.85rem 2.1rem;
+  font-size: 1.5rem;
+  box-shadow: 0 10px 30px -8px rgba(216, 17, 89, 0.45);
+  transition: padding 0.55s cubic-bezier(0.34, 1.1, 0.4, 1),
+              font-size 0.55s cubic-bezier(0.34, 1.1, 0.4, 1),
+              border-radius 0.55s ease,
+              box-shadow 0.4s ease;
 }
 
-#yesBtn.yes-fullscreen {
-  border-radius: 0;
-  font-size: clamp(3rem, 12vw, 7rem);
-  background: linear-gradient(135deg, var(--pink-dark), var(--pink-deep), var(--pink-mid));
-  animation: yesPulse 1.4s ease-in-out infinite;
+#yesBtn.yes-close {
+  animation: yesPulse 1.5s ease-in-out infinite;
 }
 
 @keyframes yesPulse {
-  0%, 100% { box-shadow: 0 10px 50px rgba(0,0,0,0.3); }
-  50%       { box-shadow: 0 10px 90px rgba(255,255,255,0.45); }
+  0%, 100% { filter: brightness(1); }
+  50%       { filter: brightness(1.08); }
+}
+
+#noBtn {
+  position: fixed;
+  left: 50%;
+  bottom: 6vh;
+  transform: translateX(-50%);
+  z-index: 100;
+  background: var(--cream);
+  color: var(--plum);
+  border: 2px solid var(--plum);
+  border-radius: 50px;
+  padding: 0.8rem 2rem;
+  font-size: 1.15rem;
+  box-shadow: 0 10px 24px -8px rgba(43, 19, 32, 0.3);
+  transition: transform 0.25s ease, opacity 0.25s ease, background 0.2s ease;
+}
+
+#noBtn:hover {
+  background: var(--blush);
+}
+
+.tally {
+  margin-top: 1.6rem;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 0.9rem;
+  color: var(--plum);
+  opacity: 0.75;
 }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 480px) {
-  .q-icon { width: 96px; height: 96px; }
-  .q-btn-area { gap: 1.2rem; }
+  .portrait { width: 88px; height: 88px; }
+  .bouquet { width: 96px; height: 68px; }
+  .card { padding: 2.25rem 1.5rem 2rem; }
+  .tulip-float { display: none; }
 }

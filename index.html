@@ -3,45 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Do You Still Love Me? 💕</title>
+  <title>Do You Still Love Me?</title>
   <link rel="icon" type="image/png" href="icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="confetti.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- ════════════════════════════════════════════════
-       FLOATING TULIPS (fixed, always visible)
-       ════════════════════════════════════════════════ -->
-  <div class="tulip-float">🌷</div>
-  <div class="tulip-float">🌷</div>
-  <div class="tulip-float">🌷</div>
-  <div class="tulip-float">🌷</div>
-  <div class="tulip-float">🌷</div>
+  <!-- Falling tulip petals, filled in by confetti.js -->
+  <div class="tulip-confetti-field" id="confettiField"></div>
 
-  <!-- ════════════════════════════════════════════════
-       PAGE 1 — The Question
-       ════════════════════════════════════════════════ -->
-  <div id="page1" class="page active">
-    <div class="p1-petals"></div>
+  <!-- Fixed corner tulips — quiet ambient framing -->
+  <div class="tulip-float tf-1" aria-hidden="true"></div>
+  <div class="tulip-float tf-2" aria-hidden="true"></div>
+  <div class="tulip-float tf-3" aria-hidden="true"></div>
+  <div class="tulip-float tf-4" aria-hidden="true"></div>
 
-    <div class="q-wrapper">
+  <main class="stage">
+    <div class="card">
 
-      <!-- Minimal icon: the uploaded pleading-pup image -->
-      <img src="icon.png" alt="Pleading pup" class="q-icon" />
+      <div class="bouquet" aria-hidden="true" id="bouquet"></div>
 
-      <!-- The question -->
-      <p class="q-title">Do you still love me?</p>
+      <img src="icon.png" alt="A pleading pup, hoping for a yes" class="portrait" />
 
-      <!-- Yes / No buttons — free-flowing, YES grows for real and the
-           layout adapts around it as NO gets clicked -->
-      <div class="q-btn-area" id="btnArea">
-        <button id="yesBtn">Yes 💕</button>
-        <button id="noBtn">No 🙈</button>
+      <p class="eyebrow">a question, asked among the tulips</p>
+      <h1 class="title">Do you still<br /><em>love</em> me?</h1>
+
+      <div class="btn-field">
+        <button id="yesBtn" class="btn btn-yes" type="button">Yes</button>
+        <button id="noBtn" class="btn btn-no" type="button">No</button>
       </div>
 
+      <p class="tally" id="tally">Take your time — you can say no as many times as you like.</p>
     </div>
-  </div><!-- end page1 -->
+  </main>
 
+  <script src="confetti.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

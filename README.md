@@ -1,28 +1,35 @@
-# Do You Still Love Me? 💕
+# Do You Still Love Me?
 
-A standalone project, separate from the anniversary page project.
+A two-page romantic mini-site: a playful Yes/No question page, then a
+"Happy Monthsary" reveal page. Tulip-themed throughout — no emoji, all
+tulip artwork is hand-drawn SVG.
 
 ## Files
 - `index.html` + `style.css` + `script.js` — the question page (Yes/No)
-- `page3.html` + `page3-style.css` — the reveal page shown after Yes is clicked
-- `icon.png` — the pleading-pup icon used on the question page
+- `happy_monthsary.html` + `page3-style.css` + `page3-script.js` — the reveal page shown after Yes is clicked
+- `confetti.js` + `confetti.css` — shared falling-tulip effect, used identically by both pages
+- `icon.png` — the pleading-pup icon on the question page
 
 ## How it works
 1. `index.html` shows the icon and the question with Yes/No buttons.
-2. Clicking **No** shrinks No and grows Yes *in place*, using `transform: scale()`
-   only — never font-size/padding — so nothing reflows and both buttons stay
-   exactly where they are. That means the No button never moves and can be
-   clicked quickly and repeatedly. No is layered on top (higher z-index) so
-   the growing Yes button never blocks it.
-3. After 6 No clicks, Yes takes over the full screen.
-4. Clicking **Yes** (either button) redirects to `page3.html` — a completely
-   separate page with its own HTML/CSS — showing the 43-month message.
-   The question page content is fully replaced by navigating away, rather
-   than swapping a div, so nothing from the question ever lingers.
+2. **No can be clicked an unlimited number of times.** Every click runs
+   the same continuous growth formula on Yes (see `growYes()` in
+   `script.js`) — there's no fixed click-count where it "jumps" to
+   fullscreen. Yes simply keeps swelling the more No gets clicked,
+   asymptotically approaching full-screen coverage. No also cycles
+   through a short list of playful reply messages and gently shrinks
+   with each click.
+3. Clicking **Yes** — always clickable, however big it's grown — goes
+   to `happy_monthsary.html`, a separate page with its own HTML/CSS.
+4. Both pages load the same `confetti.js`/`confetti.css` so the
+   falling-tulip effect is pixel-for-pixel identical on each.
 
 ## Customizing
-- Change `MAX_NO_CLICKS` in `script.js` to adjust how many No clicks it takes
-  before Yes takes over.
-- Edit the message text directly inside `page3.html` inside `.p3-message`.
-- Swap `icon.png` for a different image any time — just keep the filename,
-  or update the `src`/`href` references in `index.html`.
+- Tune how fast Yes grows by changing the `/ 6` divisor inside
+  `growYes()` in `script.js` — a smaller number makes it grow faster
+  per click.
+- Edit `NO_MESSAGES` in `script.js` to change what No says as it's clicked.
+- Edit the copy directly inside `happy_monthsary.html`.
+- Swap `icon.png` for a different image any time — just keep the
+  filename, or update the `src`/`href` references in `index.html`.
+- Tulip colors live in `TULIP_PALETTE` in `confetti.js`.
