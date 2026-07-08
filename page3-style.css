@@ -79,13 +79,6 @@ html, body {
 }
 .bouquet svg { display: block; }
 
-.p3-eyebrow {
-  font-family: 'Caveat', cursive;
-  font-size: 1.5rem;
-  color: var(--blush);
-  margin-bottom: 0.5rem;
-}
-
 .p3-title {
   font-family: 'Fraunces', serif;
   font-weight: 600;
