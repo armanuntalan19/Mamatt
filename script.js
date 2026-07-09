@@ -24,77 +24,34 @@ const NO_MESSAGES = [
   'Okay, no', 'Absolutely not', 'No comment', 'Unlimited no'
 ];
 
-// ── ILLUSTRATED TULIP SVGs (matching the reference image style) ──
-// Three variants: outline-white, filled-peach, filled-orange/red
-function tulipOutlineSVG(w) {
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 110" width="${w}" style="display:block">
-    <!-- stem -->
-    <line x1="30" y1="72" x2="30" y2="105" stroke="#3a6b4c" stroke-width="3" stroke-linecap="round"/>
-    <!-- left leaf -->
-    <path d="M30 88 Q14 78 12 62 Q22 72 30 78" fill="#4a8c5c" stroke="#3a6b4c" stroke-width="1.2"/>
-    <!-- right leaf -->
-    <path d="M30 82 Q46 72 48 56 Q38 66 30 76" fill="#4a8c5c" stroke="#3a6b4c" stroke-width="1.2"/>
-    <!-- three-lobed tulip cup, outline style -->
-    <path d="M30 20 C30 20 23 25.2 23 35.6 C23 30.4 19.5 30.4 17.75 33 C16 35.6 16 40.8 17.75 43.4 C16 48.6 17.75 53.8 21.25 53.8 C21.25 59 24.75 61.6 30 72 C35.25 61.6 38.75 59 38.75 53.8 C42.25 53.8 44 48.6 42.25 43.4 C44 40.8 44 35.6 42.25 33 C40.5 30.4 37 30.4 37 35.6 C37 25.2 30 20 30 20 Z"
-          fill="none" stroke="#c9922e" stroke-width="2.2" stroke-linejoin="round"/>
-    <!-- inner petal line -->
-    <path d="M30 22 Q30 46 30 70" fill="none" stroke="#c9922e" stroke-width="1.2" opacity="0.7"/>
-  </svg>`;
-}
-
-function tulipFilledSVG(w, petalColor, lineColor, strokeColor) {
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 110" width="${w}" style="display:block">
-    <!-- stem -->
-    <line x1="30" y1="72" x2="30" y2="105" stroke="#3a6b4c" stroke-width="3" stroke-linecap="round"/>
-    <!-- left leaf -->
-    <path d="M30 88 Q14 78 12 62 Q22 72 30 78" fill="#4a8c5c" stroke="#3a6b4c" stroke-width="1.2"/>
-    <!-- right leaf -->
-    <path d="M30 82 Q46 72 48 56 Q38 66 30 76" fill="#4a8c5c" stroke="#3a6b4c" stroke-width="1.2"/>
-    <!-- three-lobed tulip cup -->
-    <path d="M30 20 C30 20 23 25.2 23 35.6 C23 30.4 19.5 30.4 17.75 33 C16 35.6 16 40.8 17.75 43.4 C16 48.6 17.75 53.8 21.25 53.8 C21.25 59 24.75 61.6 30 72 C35.25 61.6 38.75 59 38.75 53.8 C42.25 53.8 44 48.6 42.25 43.4 C44 40.8 44 35.6 42.25 33 C40.5 30.4 37 30.4 37 35.6 C37 25.2 30 20 30 20 Z"
-          fill="${petalColor}" stroke="${strokeColor}" stroke-width="2" stroke-linejoin="round"/>
-    <!-- inner detail lines -->
-    <path d="M30 22 Q30 46 30 70" fill="none" stroke="${lineColor}" stroke-width="1.3" opacity="0.55"/>
-    <path d="M22 34 Q20 46 24 55" fill="none" stroke="${lineColor}" stroke-width="1.1" opacity="0.45"/>
-    <path d="M38 34 Q40 46 36 55" fill="none" stroke="${lineColor}" stroke-width="1.1" opacity="0.45"/>
-  </svg>`;
-}
-
-function makeTulipSVG(variant, w) {
-  if (variant === 'outline') return tulipOutlineSVG(w);
-  if (variant === 'peach')   return tulipFilledSVG(w, '#e8a87c', '#8B4513', '#c97b50');
-  if (variant === 'orange')  return tulipFilledSVG(w, '#e8522a', '#8B2500', '#c43d18');
-  if (variant === 'pink')    return tulipFilledSVG(w, '#d81159', '#6a1f4d', '#b00d47');
-  if (variant === 'gold')    return tulipFilledSVG(w, '#c9922e', '#7a4f00', '#a87420');
-  return tulipOutlineSVG(w);
-}
-
 // ── DECORATIVE TULIPS (bouquet + fixed corner tulips) ─────────
+// Uses the same realistic tulip bloom (window.tulipSVG, from
+// confetti.js) with the same colors, sizes, and corner positions
+// as the Happy Monthsary page, so both pages match exactly.
 function renderDecor() {
   const bouquet = document.getElementById('bouquet');
-  if (bouquet) {
-    // Three illustrated tulips: outline, peach, orange — matching reference
+  if (bouquet && window.tulipSVG) {
     const stems = [
-      { variant: 'outline', size: 48 },
-      { variant: 'pink',    size: 68 },
-      { variant: 'orange',  size: 48 },
+      { color: '#e7b567', size: 56 },
+      { color: '#f3a6c4', size: 76 },
+      { color: '#ef6351', size: 56 },
     ];
     stems.forEach(s => {
       const wrap = document.createElement('div');
       wrap.style.width = s.size + 'px';
-      wrap.style.flexShrink = '0';
-      wrap.innerHTML = makeTulipSVG(s.variant, s.size);
+      wrap.innerHTML = window.tulipSVG(s.color);
       bouquet.appendChild(wrap);
     });
   }
 
   // Corner floating tulips
   const corners = document.querySelectorAll('.tulip-float');
-  const cornerVariants = ['pink', 'gold', 'orange', 'outline'];
-  corners.forEach((el, i) => {
-    const size = parseInt(el.style.width) || 46;
-    el.innerHTML = makeTulipSVG(cornerVariants[i % cornerVariants.length], size);
-  });
+  if (window.tulipSVG) {
+    const cornerColors = ['#f3a6c4', '#e7b567', '#ef6351', '#d81159'];
+    corners.forEach((el, i) => {
+      el.innerHTML = window.tulipSVG(cornerColors[i % cornerColors.length]);
+    });
+  }
 }
 
 // ── YES / NO LOGIC ────────────────────────────────────────────

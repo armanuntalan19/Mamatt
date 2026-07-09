@@ -10,6 +10,10 @@ const TULIP_PALETTE = ['#d81159', '#ef6351', '#dfa13a', '#f3a6c4', '#7a2a54'];
 const LEAF_TONE = '#3a6b4c';
 
 // A single hand-drawn tulip silhouette, built from paths (no emoji).
+// The bloom is a rounded bell of overlapping petals — a soft waist,
+// a gently pointed base, and a light highlight fold on the left
+// petal for a touch of dimension — the shared shape used everywhere
+// a tulip appears (bouquets, corner accents, falling confetti).
 function tulipSVG(bloomColor, leafColor) {
   leafColor = leafColor || LEAF_TONE;
   return (
@@ -18,10 +22,11 @@ function tulipSVG(bloomColor, leafColor) {
       '<path d="M20,48 C10,45 6,37 8,29" fill="none" stroke="' + leafColor + '" stroke-width="2" stroke-linecap="round"/>' +
       '<path d="M20,43 C30,40 34,32 32,25" fill="none" stroke="' + leafColor + '" stroke-width="2" stroke-linecap="round"/>' +
       '<g transform="translate(20,30)">' +
-        '<path d="M0,-30 C0,-30 -5,-26.2 -5,-18.6 C-5,-22.4 -7.5,-22.4 -8.75,-20.5 C-10,-18.6 -10,-14.8 -8.75,-12.9 C-10,-9.1 -8.75,-5.3 -6.25,-5.3 C-6.25,-1.5 -3.75,0.4 0,8 C3.75,0.4 6.25,-1.5 6.25,-5.3 C8.75,-5.3 10,-9.1 8.75,-12.9 C10,-14.8 10,-18.6 8.75,-20.5 C7.5,-22.4 5,-22.4 5,-18.6 C5,-26.2 0,-30 0,-30 Z" fill="' + bloomColor + '"/>' +
-        '<path d="M0,-28 C0,-15 0,-5 0,6" stroke="rgba(255,255,255,0.35)" stroke-width="1.3" fill="none" stroke-linecap="round"/>' +
-        '<path d="M-7,-18 C-9,-10 -7,-2 -3,5" stroke="rgba(255,255,255,0.25)" stroke-width="1.1" fill="none" stroke-linecap="round"/>' +
-        '<path d="M7,-18 C9,-10 7,-2 3,5" stroke="rgba(255,255,255,0.25)" stroke-width="1.1" fill="none" stroke-linecap="round"/>' +
+        '<path d="M0,-34 C-5,-35 -11,-32 -12,-25 C-18,-23 -21,-17 -18,-11 C-21,-6 -19,0 -13,2 C-13,9 -8,14 -5,19 C-2,25 -1,31 0,38 C1,31 2,25 5,19 C8,14 13,9 13,2 C19,0 21,-6 18,-11 C21,-17 18,-23 12,-25 C11,-32 5,-35 0,-34 Z" fill="' + bloomColor + '"/>' +
+        '<path d="M0,-32 C0,-16 0,0 0,20" stroke="rgba(0,0,0,0.22)" stroke-width="1.3" fill="none" stroke-linecap="round"/>' +
+        '<path d="M-9,-22 C-11,-12 -8,-2 -3,6" stroke="rgba(0,0,0,0.16)" stroke-width="1.1" fill="none" stroke-linecap="round"/>' +
+        '<path d="M9,-22 C11,-12 8,-2 3,6" stroke="rgba(0,0,0,0.16)" stroke-width="1.1" fill="none" stroke-linecap="round"/>' +
+        '<path d="M-11,-24 C-15,-21 -16,-15 -13,-11" fill="rgba(255,255,255,0.32)"/>' +
       '</g>' +
     '</svg>'
   );
