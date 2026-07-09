@@ -220,14 +220,6 @@ body {
   background: var(--blush);
 }
 
-.tally {
-  margin-top: 1.6rem;
-  font-family: 'Work Sans', sans-serif;
-  font-size: clamp(0.9rem, 1.6vw, 1.05rem);
-  color: var(--plum);
-  opacity: 0.75;
-}
-
 /* ===== RESPONSIVE ===== */
 @media (max-width: 480px) {
   .card { padding: 2.25rem 1.5rem 2rem; }
