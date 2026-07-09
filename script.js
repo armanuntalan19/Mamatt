@@ -29,43 +29,34 @@ const NO_MESSAGES = [
 function tulipOutlineSVG(w) {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 110" width="${w}" style="display:block">
     <!-- stem -->
-    <line x1="30" y1="75" x2="30" y2="105" stroke="#3a6b4c" stroke-width="3" stroke-linecap="round"/>
+    <line x1="30" y1="72" x2="30" y2="105" stroke="#3a6b4c" stroke-width="3" stroke-linecap="round"/>
     <!-- left leaf -->
     <path d="M30 88 Q14 78 12 62 Q22 72 30 78" fill="#4a8c5c" stroke="#3a6b4c" stroke-width="1.2"/>
     <!-- right leaf -->
     <path d="M30 82 Q46 72 48 56 Q38 66 30 76" fill="#4a8c5c" stroke="#3a6b4c" stroke-width="1.2"/>
-    <!-- petals outline style -->
-    <path d="M30 72 Q18 60 16 44 Q18 28 30 20 Q42 28 44 44 Q42 60 30 72Z"
+    <!-- three-lobed tulip cup, outline style -->
+    <path d="M30 20 C30 20 23 25.2 23 35.6 C23 30.4 19.5 30.4 17.75 33 C16 35.6 16 40.8 17.75 43.4 C16 48.6 17.75 53.8 21.25 53.8 C21.25 59 24.75 61.6 30 72 C35.25 61.6 38.75 59 38.75 53.8 C42.25 53.8 44 48.6 42.25 43.4 C44 40.8 44 35.6 42.25 33 C40.5 30.4 37 30.4 37 35.6 C37 25.2 30 20 30 20 Z"
           fill="none" stroke="#c9922e" stroke-width="2.2" stroke-linejoin="round"/>
-    <!-- inner petal lines -->
-    <path d="M30 70 Q22 55 22 42" fill="none" stroke="#c9922e" stroke-width="1.2" opacity="0.7"/>
-    <path d="M30 70 Q38 55 38 42" fill="none" stroke="#c9922e" stroke-width="1.2" opacity="0.7"/>
-    <path d="M30 70 Q30 52 30 30" fill="none" stroke="#c9922e" stroke-width="1.2" opacity="0.7"/>
-    <!-- side petals -->
-    <path d="M16 44 Q8 34 14 20 Q20 32 22 42" fill="none" stroke="#c9922e" stroke-width="2" stroke-linejoin="round"/>
-    <path d="M44 44 Q52 34 46 20 Q40 32 38 42" fill="none" stroke="#c9922e" stroke-width="2" stroke-linejoin="round"/>
+    <!-- inner petal line -->
+    <path d="M30 22 Q30 46 30 70" fill="none" stroke="#c9922e" stroke-width="1.2" opacity="0.7"/>
   </svg>`;
 }
 
 function tulipFilledSVG(w, petalColor, lineColor, strokeColor) {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 110" width="${w}" style="display:block">
     <!-- stem -->
-    <line x1="30" y1="75" x2="30" y2="105" stroke="#3a6b4c" stroke-width="3" stroke-linecap="round"/>
+    <line x1="30" y1="72" x2="30" y2="105" stroke="#3a6b4c" stroke-width="3" stroke-linecap="round"/>
     <!-- left leaf -->
     <path d="M30 88 Q14 78 12 62 Q22 72 30 78" fill="#4a8c5c" stroke="#3a6b4c" stroke-width="1.2"/>
     <!-- right leaf -->
     <path d="M30 82 Q46 72 48 56 Q38 66 30 76" fill="#4a8c5c" stroke="#3a6b4c" stroke-width="1.2"/>
-    <!-- left side petal -->
-    <path d="M16 44 Q8 34 14 20 Q20 32 22 42" fill="${petalColor}" stroke="${strokeColor}" stroke-width="1.8" stroke-linejoin="round"/>
-    <!-- right side petal -->
-    <path d="M44 44 Q52 34 46 20 Q40 32 38 42" fill="${petalColor}" stroke="${strokeColor}" stroke-width="1.8" stroke-linejoin="round"/>
-    <!-- main center petal -->
-    <path d="M30 72 Q18 60 16 44 Q18 28 30 20 Q42 28 44 44 Q42 60 30 72Z"
+    <!-- three-lobed tulip cup -->
+    <path d="M30 20 C30 20 23 25.2 23 35.6 C23 30.4 19.5 30.4 17.75 33 C16 35.6 16 40.8 17.75 43.4 C16 48.6 17.75 53.8 21.25 53.8 C21.25 59 24.75 61.6 30 72 C35.25 61.6 38.75 59 38.75 53.8 C42.25 53.8 44 48.6 42.25 43.4 C44 40.8 44 35.6 42.25 33 C40.5 30.4 37 30.4 37 35.6 C37 25.2 30 20 30 20 Z"
           fill="${petalColor}" stroke="${strokeColor}" stroke-width="2" stroke-linejoin="round"/>
     <!-- inner detail lines -->
-    <path d="M30 68 Q23 54 23 42" fill="none" stroke="${lineColor}" stroke-width="1.3" opacity="0.55"/>
-    <path d="M30 68 Q37 54 37 42" fill="none" stroke="${lineColor}" stroke-width="1.3" opacity="0.55"/>
-    <path d="M30 68 Q30 52 30 28" fill="none" stroke="${lineColor}" stroke-width="1.3" opacity="0.55"/>
+    <path d="M30 22 Q30 46 30 70" fill="none" stroke="${lineColor}" stroke-width="1.3" opacity="0.55"/>
+    <path d="M22 34 Q20 46 24 55" fill="none" stroke="${lineColor}" stroke-width="1.1" opacity="0.45"/>
+    <path d="M38 34 Q40 46 36 55" fill="none" stroke="${lineColor}" stroke-width="1.1" opacity="0.45"/>
   </svg>`;
 }
 
