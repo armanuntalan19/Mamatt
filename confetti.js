@@ -13,14 +13,15 @@ const LEAF_TONE = '#3a6b4c';
 function tulipSVG(bloomColor, leafColor) {
   leafColor = leafColor || LEAF_TONE;
   return (
-    '<svg viewBox="0 0 40 60" xmlns="http://www.w3.org/2000/svg">' +
-      '<path d="M20,58 L20,26" fill="none" stroke="' + leafColor + '" stroke-width="2.2" stroke-linecap="round"/>' +
-      '<path d="M20,46 C10,43 6,35 8,27" fill="none" stroke="' + leafColor + '" stroke-width="2" stroke-linecap="round"/>' +
-      '<path d="M20,41 C30,38 34,30 32,23" fill="none" stroke="' + leafColor + '" stroke-width="2" stroke-linecap="round"/>' +
-      '<g transform="translate(20,21)">' +
-        '<path d="M0,0 C-9,-4 -9,-20 0,-26 C9,-20 9,-4 0,0 Z" fill="' + bloomColor + '" opacity="0.85" transform="rotate(-20)"/>' +
-        '<path d="M0,0 C-9,-4 -9,-20 0,-26 C9,-20 9,-4 0,0 Z" fill="' + bloomColor + '"/>' +
-        '<path d="M0,0 C-9,-4 -9,-20 0,-26 C9,-20 9,-4 0,0 Z" fill="' + bloomColor + '" opacity="0.85" transform="rotate(20)"/>' +
+    '<svg viewBox="0 0 40 64" xmlns="http://www.w3.org/2000/svg">' +
+      '<path d="M20,62 L20,32" fill="none" stroke="' + leafColor + '" stroke-width="2.4" stroke-linecap="round"/>' +
+      '<path d="M20,48 C10,45 6,37 8,29" fill="none" stroke="' + leafColor + '" stroke-width="2" stroke-linecap="round"/>' +
+      '<path d="M20,43 C30,40 34,32 32,25" fill="none" stroke="' + leafColor + '" stroke-width="2" stroke-linecap="round"/>' +
+      '<g transform="translate(20,30)">' +
+        '<path d="M-9,4 C-15,2 -16,-8 -10,-13 C-11,-20 -6,-27 0,-30 C6,-27 11,-20 10,-13 C16,-8 15,2 9,4 C8,8 3,10 0,7 C-3,10 -8,8 -9,4 Z" fill="' + bloomColor + '"/>' +
+        '<path d="M0,-29 C-1,-19 -1,-8 0,6" stroke="rgba(255,255,255,0.35)" stroke-width="1.3" fill="none" stroke-linecap="round"/>' +
+        '<path d="M-9,-12 C-11,-4 -9,3 -6,6" stroke="rgba(255,255,255,0.25)" stroke-width="1.1" fill="none" stroke-linecap="round"/>' +
+        '<path d="M9,-12 C11,-4 9,3 6,6" stroke="rgba(255,255,255,0.25)" stroke-width="1.1" fill="none" stroke-linecap="round"/>' +
       '</g>' +
     '</svg>'
   );

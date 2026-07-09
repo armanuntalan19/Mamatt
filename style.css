@@ -69,7 +69,7 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 3rem 1.25rem;
+  padding: 2rem 0;
 }
 
 /* ===== CARD ===== */
@@ -77,20 +77,20 @@ body {
   position: relative;
   z-index: 2;
   text-align: center;
-  max-width: 560px;
+  max-width: min(700px, 92vw);
   width: 100%;
   margin: 0 auto;
   background: rgba(255, 250, 245, 0.72);
   border: 1px solid rgba(106, 31, 77, 0.12);
   border-radius: 32px;
-  padding: 2.75rem 2.25rem 2.5rem;
+  padding: clamp(2.5rem, 6vw, 4rem) clamp(1.75rem, 6vw, 3.5rem) clamp(2.25rem, 5vw, 3.25rem);
   box-shadow: 0 30px 70px -25px rgba(106, 31, 77, 0.35);
   backdrop-filter: blur(6px);
 }
 
 .bouquet {
-  width: 120px;
-  height: 84px;
+  width: clamp(96px, 16vw, 160px);
+  height: clamp(68px, 11vw, 112px);
   margin: 0 auto 0.5rem;
   display: flex;
   align-items: flex-end;
@@ -100,8 +100,8 @@ body {
 .bouquet svg { display: block; }
 
 .portrait {
-  width: 108px;
-  height: 108px;
+  width: clamp(88px, 15vw, 148px);
+  height: clamp(88px, 15vw, 148px);
   object-fit: contain;
   display: block;
   margin: 0 auto 1.1rem;
@@ -120,7 +120,7 @@ body {
 
 .eyebrow {
   font-family: 'Caveat', cursive;
-  font-size: 1.35rem;
+  font-size: clamp(1.35rem, 2.6vw, 1.75rem);
   color: var(--crimson);
   letter-spacing: 0.01em;
   margin-bottom: 0.35rem;
@@ -129,7 +129,7 @@ body {
 .title {
   font-family: 'Fraunces', serif;
   font-weight: 600;
-  font-size: clamp(2rem, 6vw, 3rem);
+  font-size: clamp(2.1rem, 5.5vw, 3.75rem);
   color: var(--plum);
   line-height: 1.22;
   margin-bottom: 2.1rem;
@@ -140,18 +140,21 @@ body {
 }
 
 /* ===== BUTTONS =====
-   YES is fixed and centered on the viewport from the very first
-   render. Every NO click grows it by the same continuous formula
-   (see script.js) — there is no special-cased "jump" at a fixed
-   click count. It simply keeps swelling, the longer NO is clicked,
+   YES and NO sit side by side at rest. The moment NO is first
+   clicked, script.js locks each button's on-screen position
+   (via getBoundingClientRect) and hands it a `position: fixed`
+   home in the exact same spot, then transitions it to its new
+   target — a genuine FLIP, so nothing jumps. From then on, every
+   further NO click keeps growing YES by the same continuous
+   formula — there is no special-cased snap at a fixed click
+   count. It simply keeps swelling, the longer NO is clicked,
    until it genuinely fills the screen. */
 .btn-field {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.4rem;
-  min-height: 70px;
+  gap: 1.25rem;
   flex-wrap: wrap;
 }
 
@@ -165,21 +168,24 @@ body {
 }
 
 #yesBtn {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 50;
   color: #fff;
   background: linear-gradient(135deg, var(--plum), var(--crimson) 55%, var(--coral));
   border-radius: 60px;
-  padding: 0.85rem 2.1rem;
-  font-size: 1.5rem;
+  padding: 0.9rem 2.4rem;
+  font-size: clamp(1.2rem, 2.6vw, 1.5rem);
   box-shadow: 0 10px 30px -8px rgba(216, 17, 89, 0.45);
   transition: padding 0.55s cubic-bezier(0.34, 1.1, 0.4, 1),
               font-size 0.55s cubic-bezier(0.34, 1.1, 0.4, 1),
               border-radius 0.55s ease,
-              box-shadow 0.4s ease;
+              box-shadow 0.4s ease,
+              top 0.55s cubic-bezier(0.34, 1.1, 0.4, 1),
+              left 0.55s cubic-bezier(0.34, 1.1, 0.4, 1);
+}
+
+#yesBtn.yes-fixed {
+  position: fixed;
+  z-index: 50;
+  transform: translate(-50%, -50%);
 }
 
 #yesBtn.yes-close {
@@ -192,29 +198,38 @@ body {
 }
 
 #noBtn {
-  position: fixed;
-  left: 50%;
-  bottom: 6vh;
-  transform: translateX(-50%);
-  z-index: 100;
   background: var(--cream);
   color: var(--plum);
   border: 2px solid var(--plum);
   border-radius: 50px;
-  padding: 0.8rem 2rem;
-  font-size: 1.15rem;
+  padding: 0.85rem 2.1rem;
+  font-size: clamp(1rem, 2vw, 1.15rem);
   box-shadow: 0 10px 24px -8px rgba(43, 19, 32, 0.3);
-  transition: transform 0.25s ease, opacity 0.25s ease, background 0.2s ease;
+  transition: transform 0.25s ease, opacity 0.25s ease, background 0.2s ease,
+              top 0.55s cubic-bezier(0.34, 1.1, 0.4, 1),
+              left 0.55s cubic-bezier(0.34, 1.1, 0.4, 1);
+}
+
+#noBtn.no-fixed {
+  position: fixed;
+  z-index: 100;
+  transform: translate(-50%, -50%);
 }
 
 #noBtn:hover {
   background: var(--blush);
 }
 
+.tally {
+  margin-top: 1.6rem;
+  font-family: 'Work Sans', sans-serif;
+  font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+  color: var(--plum);
+  opacity: 0.75;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 480px) {
-  .portrait { width: 88px; height: 88px; }
-  .bouquet { width: 96px; height: 68px; }
   .card { padding: 2.25rem 1.5rem 2rem; }
   .tulip-float { display: none; }
 }

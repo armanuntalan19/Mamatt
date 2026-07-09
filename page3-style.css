@@ -1,6 +1,6 @@
 /* ============================================================
    page3-style.css — "Happy Monthsary" reveal page
-   Same palette, type, and confetti as the question page.
+   Same type and confetti as the question page, in shades of pink.
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400;1,600&family=Caveat:wght@500;700&family=Work+Sans:wght@400;500;600&display=swap');
@@ -12,17 +12,19 @@
 }
 
 :root {
-  --plum:    #4a1638;
-  --crimson: #d81159;
-  --coral:   #ef6351;
-  --gold:    #e7b567;
-  --blush:   #f3a6c4;
+  --plum:     #6a1f4d;
+  --crimson:  #d81159;
+  --coral:    #ef6351;
+  --gold:     #c9922e;
+  --rose:     #f6a8c0;
+  --hotpink:  #e23f7b;
+  --deeppink: #93275f;
 }
 
 html, body {
   overflow-x: hidden;
   font-family: 'Work Sans', sans-serif;
-  color: #fff;
+  color: var(--plum);
   height: 100%;
 }
 
@@ -32,7 +34,7 @@ html, body {
   pointer-events: none;
   z-index: 2;
   width: 46px;
-  opacity: 0.5;
+  opacity: 0.55;
   animation: tulipDrift 6s ease-in-out infinite;
 }
 .tulip-float svg { display: block; width: 100%; height: auto; }
@@ -48,29 +50,30 @@ html, body {
   100% { transform: translateY(0px) rotate(-6deg); }
 }
 
-/* ===== PAGE ===== */
+/* ===== PAGE — shades of pink, matching the question page's family ===== */
 #page3 {
   min-height: 100vh;
   background:
-    radial-gradient(120% 90% at 50% -10%, #7a2a54 0%, transparent 55%),
-    linear-gradient(165deg, #3a1130 0%, var(--plum) 45%, #7a2a54 100%);
+    radial-gradient(120% 90% at 50% -8%, #fff1f5 0%, transparent 55%),
+    linear-gradient(165deg, #fdeef3 0%, #f6b9cd 45%, var(--hotpink) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 3rem 1.5rem;
+  padding: 2rem 0;
 }
 
 .p3-inner {
   position: relative;
   z-index: 2;
-  max-width: 700px;
+  max-width: min(760px, 92vw);
   text-align: center;
   margin: 0 auto;
+  padding: 0 1.5rem;
 }
 
 .bouquet {
-  width: 150px;
-  height: 96px;
+  width: clamp(140px, 18vw, 190px);
+  height: clamp(90px, 12vw, 122px);
   margin: 0 auto 0.75rem;
   display: flex;
   align-items: flex-end;
@@ -79,13 +82,20 @@ html, body {
 }
 .bouquet svg { display: block; }
 
+.p3-eyebrow {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(1.5rem, 2.8vw, 1.85rem);
+  color: var(--deeppink);
+  margin-bottom: 0.5rem;
+}
+
 .p3-title {
   font-family: 'Fraunces', serif;
   font-weight: 600;
   font-style: italic;
-  font-size: clamp(2rem, 7vw, 4.25rem);
-  color: #fff;
-  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.35);
+  font-size: clamp(2.2rem, 7vw, 4.75rem);
+  color: var(--plum);
+  text-shadow: 0 4px 24px rgba(147, 39, 95, 0.18);
   line-height: 1.2;
   margin-bottom: 0.4rem;
 }
@@ -93,25 +103,24 @@ html, body {
 .p3-months {
   font-family: 'Caveat', cursive;
   font-weight: 700;
-  font-size: clamp(2.75rem, 9vw, 5.5rem);
-  color: var(--gold);
+  font-size: clamp(3rem, 9vw, 6rem);
+  color: var(--crimson);
   line-height: 1;
-  text-shadow: 0 0 40px rgba(231, 181, 103, 0.45);
+  text-shadow: 0 0 40px rgba(216, 17, 89, 0.25);
   margin-bottom: 1.1rem;
 }
 
 .p3-sub {
-  font-family: 'Caveat', cursive;
-  font-size: 1.1rem;
+  font-family: 'Work Sans', sans-serif;
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
   font-weight: 400;
-  color: #ffe3ef;
+  color: var(--deeppink);
   opacity: 0.92;
-  max-width: 460px;
+  max-width: 480px;
   margin: 0 auto;
   line-height: 1.6;
 }
 
 @media (max-width: 480px) {
-  .bouquet { width: 120px; height: 78px; }
   .tulip-float { display: none; }
 }
