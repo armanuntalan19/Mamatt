@@ -213,6 +213,7 @@ body {
   font-size: clamp(1.2rem, 2.6vw, 1.5rem);
   box-shadow: 0 10px 24px -8px rgba(43, 19, 32, 0.3);
   transition: transform 0.25s ease, opacity 0.25s ease, background 0.2s ease,
+              box-shadow 0.4s ease,
               top 0.55s cubic-bezier(0.34, 1.1, 0.4, 1),
               left 0.55s cubic-bezier(0.34, 1.1, 0.4, 1);
 }
@@ -225,6 +226,12 @@ body {
 
 #noBtn:hover {
   background: var(--blush);
+  box-shadow: 0 14px 34px -8px rgba(43, 19, 32, 0.45);
+  transform: scale(1.04);
+}
+
+#noBtn.no-fixed:hover {
+  transform: translate(-50%, -50%) scale(1.04);
 }
 
 /* ===== RESPONSIVE ===== */
