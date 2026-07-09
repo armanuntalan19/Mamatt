@@ -24,30 +24,86 @@ const NO_MESSAGES = [
   'Okay, no', 'Absolutely not', 'No comment', 'Unlimited no'
 ];
 
+// ── ILLUSTRATED TULIP SVGs (matching the reference image style) ──
+// Three variants: outline-white, filled-peach, filled-orange/red
+function tulipOutlineSVG(w) {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 110" width="${w}" style="display:block">
+    <!-- stem -->
+    <line x1="30" y1="75" x2="30" y2="105" stroke="#3a6b4c" stroke-width="3" stroke-linecap="round"/>
+    <!-- left leaf -->
+    <path d="M30 88 Q14 78 12 62 Q22 72 30 78" fill="#4a8c5c" stroke="#3a6b4c" stroke-width="1.2"/>
+    <!-- right leaf -->
+    <path d="M30 82 Q46 72 48 56 Q38 66 30 76" fill="#4a8c5c" stroke="#3a6b4c" stroke-width="1.2"/>
+    <!-- petals outline style -->
+    <path d="M30 72 Q18 60 16 44 Q18 28 30 20 Q42 28 44 44 Q42 60 30 72Z"
+          fill="none" stroke="#c9922e" stroke-width="2.2" stroke-linejoin="round"/>
+    <!-- inner petal lines -->
+    <path d="M30 70 Q22 55 22 42" fill="none" stroke="#c9922e" stroke-width="1.2" opacity="0.7"/>
+    <path d="M30 70 Q38 55 38 42" fill="none" stroke="#c9922e" stroke-width="1.2" opacity="0.7"/>
+    <path d="M30 70 Q30 52 30 30" fill="none" stroke="#c9922e" stroke-width="1.2" opacity="0.7"/>
+    <!-- side petals -->
+    <path d="M16 44 Q8 34 14 20 Q20 32 22 42" fill="none" stroke="#c9922e" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M44 44 Q52 34 46 20 Q40 32 38 42" fill="none" stroke="#c9922e" stroke-width="2" stroke-linejoin="round"/>
+  </svg>`;
+}
+
+function tulipFilledSVG(w, petalColor, lineColor, strokeColor) {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 110" width="${w}" style="display:block">
+    <!-- stem -->
+    <line x1="30" y1="75" x2="30" y2="105" stroke="#3a6b4c" stroke-width="3" stroke-linecap="round"/>
+    <!-- left leaf -->
+    <path d="M30 88 Q14 78 12 62 Q22 72 30 78" fill="#4a8c5c" stroke="#3a6b4c" stroke-width="1.2"/>
+    <!-- right leaf -->
+    <path d="M30 82 Q46 72 48 56 Q38 66 30 76" fill="#4a8c5c" stroke="#3a6b4c" stroke-width="1.2"/>
+    <!-- left side petal -->
+    <path d="M16 44 Q8 34 14 20 Q20 32 22 42" fill="${petalColor}" stroke="${strokeColor}" stroke-width="1.8" stroke-linejoin="round"/>
+    <!-- right side petal -->
+    <path d="M44 44 Q52 34 46 20 Q40 32 38 42" fill="${petalColor}" stroke="${strokeColor}" stroke-width="1.8" stroke-linejoin="round"/>
+    <!-- main center petal -->
+    <path d="M30 72 Q18 60 16 44 Q18 28 30 20 Q42 28 44 44 Q42 60 30 72Z"
+          fill="${petalColor}" stroke="${strokeColor}" stroke-width="2" stroke-linejoin="round"/>
+    <!-- inner detail lines -->
+    <path d="M30 68 Q23 54 23 42" fill="none" stroke="${lineColor}" stroke-width="1.3" opacity="0.55"/>
+    <path d="M30 68 Q37 54 37 42" fill="none" stroke="${lineColor}" stroke-width="1.3" opacity="0.55"/>
+    <path d="M30 68 Q30 52 30 28" fill="none" stroke="${lineColor}" stroke-width="1.3" opacity="0.55"/>
+  </svg>`;
+}
+
+function makeTulipSVG(variant, w) {
+  if (variant === 'outline') return tulipOutlineSVG(w);
+  if (variant === 'peach')   return tulipFilledSVG(w, '#e8a87c', '#8B4513', '#c97b50');
+  if (variant === 'orange')  return tulipFilledSVG(w, '#e8522a', '#8B2500', '#c43d18');
+  if (variant === 'pink')    return tulipFilledSVG(w, '#d81159', '#6a1f4d', '#b00d47');
+  if (variant === 'gold')    return tulipFilledSVG(w, '#c9922e', '#7a4f00', '#a87420');
+  return tulipOutlineSVG(w);
+}
+
 // ── DECORATIVE TULIPS (bouquet + fixed corner tulips) ─────────
 function renderDecor() {
   const bouquet = document.getElementById('bouquet');
-  if (bouquet && window.tulipSVG) {
+  if (bouquet) {
+    // Three illustrated tulips: outline, peach, orange — matching reference
     const stems = [
-      { color: '#c9922e', size: 54 },
-      { color: '#d81159', size: 72 },
-      { color: '#ef6351', size: 54 },
+      { variant: 'outline', size: 48 },
+      { variant: 'pink',    size: 68 },
+      { variant: 'orange',  size: 48 },
     ];
     stems.forEach(s => {
       const wrap = document.createElement('div');
       wrap.style.width = s.size + 'px';
-      wrap.innerHTML = window.tulipSVG(s.color);
+      wrap.style.flexShrink = '0';
+      wrap.innerHTML = makeTulipSVG(s.variant, s.size);
       bouquet.appendChild(wrap);
     });
   }
 
-  if (window.tulipSVG) {
-    const corners = document.querySelectorAll('.tulip-float');
-    const cornerColors = ['#d81159', '#c9922e', '#ef6351', '#7a2a54'];
-    corners.forEach((el, i) => {
-      el.innerHTML = window.tulipSVG(cornerColors[i % cornerColors.length]);
-    });
-  }
+  // Corner floating tulips
+  const corners = document.querySelectorAll('.tulip-float');
+  const cornerVariants = ['pink', 'gold', 'orange', 'outline'];
+  corners.forEach((el, i) => {
+    const size = parseInt(el.style.width) || 46;
+    el.innerHTML = makeTulipSVG(cornerVariants[i % cornerVariants.length], size);
+  });
 }
 
 // ── YES / NO LOGIC ────────────────────────────────────────────
