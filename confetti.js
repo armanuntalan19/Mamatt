@@ -4,12 +4,12 @@
    both pages show the exact same falling-tulip effect.
    ============================================================ */
 
-// Default palette — used on the question (index) page.
+// Same five tones on both pages — this is what keeps the effect identical
+// regardless of a light or dark background.
 const TULIP_PALETTE = ['#d81159', '#ef6351', '#dfa13a', '#f3a6c4', '#7a2a54'];
-// A separate, deliberately different palette for the Monthsary reveal
-// page — warm gold and violet tones instead of the index page's pink
-// and crimson, so the two pages read as distinct moments.
-const MONTHSARY_PALETTE = ['#8a4fc7', '#e0a458', '#c77dff', '#b8449a', '#5b3a8e'];
+// Monthsary reveal page uses the same pink/crimson family as the index
+// page, so the two pages read as one continuous moment.
+const MONTHSARY_PALETTE = ['#d81159', '#ef6351', '#dfa13a', '#f3a6c4', '#7a2a54'];
 const LEAF_TONE = '#3a6b4c';
 
 // A single flat tulip icon — same silhouette used everywhere a tulip
