@@ -7,9 +7,10 @@
 // Same five tones on both pages — this is what keeps the effect identical
 // regardless of a light or dark background.
 const TULIP_PALETTE = ['#d81159', '#ef6351', '#dfa13a', '#f3a6c4', '#7a2a54'];
-// Monthsary reveal page uses the same pink/crimson family as the index
-// page, so the two pages read as one continuous moment.
-const MONTHSARY_PALETTE = ['#d81159', '#ef6351', '#dfa13a', '#f3a6c4', '#7a2a54'];
+// Monthsary reveal page uses real, saturated tulip colors — yellow,
+// orange, purple, and red, the way tulips actually grow — instead of
+// the index page's pink/crimson-only bouquet.
+const MONTHSARY_PALETTE = ['#f7ca18', '#f39c12', '#8e44ad', '#c0392b', '#6c3483'];
 const LEAF_TONE = '#3a6b4c';
 
 // A single flat tulip icon — same silhouette used everywhere a tulip
