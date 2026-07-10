@@ -93,7 +93,7 @@ body {
   justify-content: center;
   gap: 4px;
 }
-.bouquet svg { display: block; }
+.bouquet svg { display: block; width: 100%; height: auto; }
 
 .portrait {
   width: clamp(88px, 15vw, 148px);

@@ -17,8 +17,11 @@ tulip artwork is hand-drawn SVG.
    `script.js`) — there's no fixed click-count where it "jumps" to
    fullscreen. Yes simply keeps swelling the more No gets clicked,
    asymptotically approaching full-screen coverage. No also cycles
-   through a short list of playful reply messages and gently shrinks
-   with each click.
+   through a short list of playful reply messages and shrinks on the
+   exact same curve, in reverse — no floor, so it asymptotically
+   shrinks toward nothing. Once it's effectively invisible it stops
+   accepting clicks/taps/keyboard focus, leaving Yes as the only real
+   option on screen.
 3. Clicking **Yes** — always clickable, however big it's grown — goes
    to `happy_monthsary.html`, a separate page with its own HTML/CSS.
 4. Both pages load the same `confetti.js`/`confetti.css` so the

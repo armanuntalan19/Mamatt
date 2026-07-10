@@ -141,9 +141,29 @@ function updateNo(noBtn, n) {
   const msg = NO_MESSAGES[(n - 1) % NO_MESSAGES.length];
   noBtn.textContent = msg;
 
-  const shrink = Math.max(0.55, 1 - n * 0.03);
-  noBtn.style.transform = `translate(-50%, -50%) scale(${shrink})`;
-  noBtn.style.opacity = Math.max(0.4, 1 - n * 0.025);
+  // Same continuous curve as growYes, run in reverse: NO shrinks at
+  // the same pace YES grows, so by the time YES is filling the
+  // screen, NO has asymptotically shrunk toward nothing. No floor —
+  // it keeps shrinking for as long as NO keeps getting clicked, same
+  // "no fixed shortcut, just keeps going" rule as YES's growth.
+  const t = 1 - Math.exp(-n / 6);
+  const shrink = Math.max(0, 1 - t);
+
+  noBtn.style.transform = `translate(-50%, -50%) scale(${shrink.toFixed(4)})`;
+  noBtn.style.opacity = shrink.toFixed(4);
+
+  // Once it's effectively invisible, stop it from grabbing clicks,
+  // taps, or keyboard focus — YES is the only real option left on
+  // screen at that point.
+  if (shrink < 0.03) {
+    noBtn.style.pointerEvents = 'none';
+    noBtn.setAttribute('aria-hidden', 'true');
+    noBtn.tabIndex = -1;
+  } else {
+    noBtn.style.pointerEvents = '';
+    noBtn.removeAttribute('aria-hidden');
+    noBtn.tabIndex = 0;
+  }
 }
 
 // ── BOOT ───────────────────────────────────────────────────────
