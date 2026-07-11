@@ -71,16 +71,6 @@ body {
   --rot: 10deg;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
 }
-.hd-ribbon-2 {
-  width: clamp(110px, 15vw, 200px);
-  bottom: 3%;
-  right: 3%;
-  z-index: 1;
-  animation-delay: 0.3s, 1.2s;
-  animation-duration: 1s, 6.7s;
-  --rot: -10deg;
-  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
-}
 
 @media (max-width: 640px) {
   .hd-heart-l { width: clamp(110px, 30vw, 170px); }
