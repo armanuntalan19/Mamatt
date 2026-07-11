@@ -60,6 +60,12 @@
 
 .decor-img img { width: 100%; height: auto; display: block; }
 
+/* Mirrors a photo horizontally without touching the parent's own
+   transform (used for animation) — needed for source photos that
+   are cropped on one side, so the crop can be flipped away from
+   view instead of showing. */
+.img-flip { transform: scaleX(-1); }
+
 @keyframes decorIn {
   from { opacity: 0; }
   to   { opacity: var(--rest-opacity, 1); }

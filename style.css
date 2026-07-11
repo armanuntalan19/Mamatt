@@ -39,77 +39,66 @@ body {
 }
 
 /* ===== HERO DECOR — hearts, ribbon & tulip photos (index only) =====
-   Positioned around the hero card for a welcoming first impression.
+   Two tulip bouquets anchor the bottom corners (large, bleeding
+   slightly off-screen for depth); two hearts frame the top corners;
+   one ribbon accents the top edge. Kept to five pieces total, well
+   clear of the card, for a curated rather than scattered feel.
    .decor-layer / .decor-img / decorFloat keyframes are shared with
    confetti.css; only placement is page-specific here. */
-.hero-decor .decor-img { --rest-opacity: 0.92; }
+.hero-decor .decor-img { --rest-opacity: 0.9; }
 
 .hd-heart-l {
-  width: clamp(46px, 6.4vw, 78px);
-  top: 9%;
-  left: 6%;
+  width: clamp(38px, 4.6vw, 60px);
+  top: 7%;
+  left: 7%;
   animation-delay: 0.1s, 0.3s;
   animation-duration: 1s, 6.4s;
 }
 .hd-heart-r {
-  width: clamp(36px, 5vw, 60px);
-  top: 16%;
-  right: 8%;
+  width: clamp(38px, 4.6vw, 60px);
+  top: 7%;
+  right: 7%;
   animation-delay: 0.4s, 1.1s;
   animation-duration: 1s, 7.2s;
 }
-.hd-ribbon-l {
-  width: clamp(52px, 7vw, 88px);
-  bottom: 8%;
-  left: 5%;
-  animation-delay: 0.2s, 0.7s;
-  animation-duration: 1s, 6.9s;
-  transform: rotate(-8deg);
-}
-.hd-ribbon-r {
-  width: clamp(40px, 5.6vw, 68px);
-  top: 10%;
-  right: 20%;
+.hd-ribbon {
+  width: clamp(46px, 5.6vw, 76px);
+  top: 15%;
+  right: 15%;
   animation-delay: 0.5s, 1.6s;
   animation-duration: 1s, 6.1s;
-  transform: rotate(10deg);
+  --rot: 10deg;
   display: none;
 }
-@media (min-width: 720px) { .hd-ribbon-r { display: block; } }
+@media (min-width: 640px) { .hd-ribbon { display: block; } }
 
+/* Bottom-corner bouquets — the two visual anchors of the page. */
 .hd-tulip-1 {
-  width: clamp(120px, 15vw, 210px);
-  bottom: -3%;
-  left: -3%;
+  width: clamp(150px, 18vw, 250px);
+  bottom: -4%;
+  left: -4%;
   z-index: 1;
   animation-delay: 0.1s, 0.9s;
   animation-duration: 1.1s, 8s;
-  --rot: -6deg;
+  --rot: -5deg;
 }
 .hd-tulip-2 {
-  width: clamp(110px, 14vw, 190px);
+  width: clamp(150px, 18vw, 250px);
   bottom: -4%;
-  right: -2%;
+  right: -4%;
   z-index: 1;
   animation-delay: 0.2s, 0.4s;
   animation-duration: 1.1s, 7.4s;
-  --rot: 7deg;
+  --rot: 5deg;
 }
-.hd-tulip-3 {
-  width: clamp(70px, 9vw, 118px);
-  top: 4%;
-  right: 4%;
-  z-index: 1;
-  animation-delay: 0.3s, 1.3s;
-  animation-duration: 1.1s, 6.6s;
-  --rot: 9deg;
-  display: none;
-}
-@media (min-width: 560px) { .hd-tulip-3 { display: block; } }
 
 /* Use the wide float arc for the two big corner bouquets so their
    motion reads differently from the small hearts/ribbon. */
 .hd-tulip-1, .hd-tulip-2 { animation-name: decorIn, decorFloatWide; }
+
+@media (max-width: 640px) {
+  .hd-tulip-1, .hd-tulip-2 { width: clamp(110px, 26vw, 160px); }
+}
 
 /* ===== STAGE ===== */
 .stage {
