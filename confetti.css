@@ -88,8 +88,5 @@
 }
 
 @media (max-width: 480px) {
-  .decor-layer { opacity: 0.85; }
-}
-@media (max-width: 340px) {
-  .decor-layer { display: none; }
+  .decor-layer { opacity: 0.95; }
 }
