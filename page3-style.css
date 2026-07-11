@@ -34,7 +34,11 @@ html, body {
   * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
 
-/* ===== HERO DECOR — tulip photos + lace/gem accents ===== */
+/* ===== HERO DECOR — tulip photos + lace/gem accents =====
+   Sizes, rotation and edge-bleed are tuned per breakpoint rather
+   than simply scaled down from desktop. Decor sits behind the card
+   (z-index 3) so it can bleed off the edges freely without ever
+   covering the text. */
 .hero-decor .decor-img { --rest-opacity: 0.9; }
 
 .hd-tulip-1 {
@@ -80,10 +84,35 @@ html, body {
 
 .hd-tulip-1, .hd-tulip-2 { animation-name: decorIn, decorFloatWide; }
 
+/* ----- Phones: bigger, deliberately cropped by the edges, each
+   piece rotated differently so it feels hand-placed. ----- */
 @media (max-width: 640px) {
-  .hd-tulip-1, .hd-tulip-2 { width: clamp(110px, 26vw, 160px); }
-  .hd-gem { width: clamp(150px, 42vw, 240px); top: 3%; right: 1%; }
-  .hd-gem-2 { width: clamp(150px, 42vw, 240px); bottom: 3%; left: 1%; }
+  .hd-tulip-1 { width: clamp(190px, 56vw, 270px); top: -7%; left: -12%; --rot: 8deg; }
+  .hd-tulip-2 { width: clamp(190px, 56vw, 270px); bottom: -7%; right: -12%; --rot: -8deg; }
+  .hd-gem     { width: clamp(220px, 62vw, 320px); top: -3%; right: -10%; }
+  .hd-gem-2   { width: clamp(220px, 62vw, 320px); bottom: -3%; left: -10%; }
+}
+
+@media (max-width: 380px) {
+  .hd-tulip-1, .hd-tulip-2 { width: clamp(160px, 52vw, 220px); }
+  .hd-gem, .hd-gem-2 { width: clamp(190px, 58vw, 260px); }
+}
+
+/* ----- Tablets / iPad: mid-way scale, still bleeding off corners. ----- */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .hd-tulip-1 { width: clamp(200px, 22vw, 270px); top: -5%; left: -6%; --rot: 7deg; }
+  .hd-tulip-2 { width: clamp(200px, 22vw, 270px); bottom: -5%; right: -6%; --rot: -7deg; }
+  .hd-gem     { width: clamp(280px, 36vw, 400px); top: 0%; right: -5%; }
+  .hd-gem-2   { width: clamp(280px, 36vw, 400px); bottom: 0%; left: -5%; }
+}
+
+/* ----- iPad portrait specifically: bigger fixed ceilings so decor stays
+   visually large even though the upright viewport is narrower. ----- */
+@media (min-width: 641px) and (max-width: 1024px) and (orientation: portrait) {
+  .hd-tulip-1 { width: clamp(230px, 28vw, 310px); top: -6%; left: -8%; }
+  .hd-tulip-2 { width: clamp(230px, 28vw, 310px); bottom: -6%; right: -8%; }
+  .hd-gem     { width: clamp(320px, 42vw, 440px); top: 1%; right: -7%; }
+  .hd-gem-2   { width: clamp(320px, 42vw, 440px); bottom: 1%; left: -7%; }
 }
 
 /* ===== PAGE — corrugated burgundy backdrop, matching the question page ===== */
@@ -181,10 +210,7 @@ html, body {
 /* Phones (portrait & landscape) */
 @media (max-width: 480px) {
   .p3-inner { padding: 1.85rem 1.15rem; border-radius: 16px; }
-  .hd-gem { top: 3%; right: 1%; }
-  .hd-gem-2 { bottom: 3%; left: 1%; }
-  .hd-tulip-1 { top: -6%; left: -8%; }
-  .hd-tulip-2 { bottom: -6%; right: -8%; }
+  .bouquet { width: clamp(150px, 40vw, 195px); }
 }
 
 @media (max-width: 360px) {
@@ -200,8 +226,6 @@ html, body {
 /* Tablets / iPad portrait & landscape */
 @media (min-width: 641px) and (max-width: 1024px) {
   .p3-inner { max-width: min(660px, 88vw); padding: 3rem 2.75rem; }
-  .hd-tulip-1, .hd-tulip-2 { width: clamp(170px, 20vw, 230px); }
-  .hd-gem, .hd-gem-2 { width: clamp(260px, 34vw, 380px); }
 }
 
 @media (min-width: 641px) and (max-width: 820px) and (orientation: portrait) {
