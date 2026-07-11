@@ -83,9 +83,9 @@ body {
 }
 
 @media (max-width: 640px) {
-  .hd-heart-l { width: clamp(84px, 22vw, 130px); }
-  .hd-heart-r { width: clamp(110px, 30vw, 180px); }
-  .hd-ribbon, .hd-ribbon-2 { width: clamp(74px, 20vw, 120px); }
+  .hd-heart-l { width: clamp(110px, 30vw, 170px); }
+  .hd-heart-r { width: clamp(150px, 40vw, 230px); }
+  .hd-ribbon, .hd-ribbon-2 { width: clamp(100px, 28vw, 160px); }
 }
 
 /* ===== STAGE — corrugated burgundy backdrop ===== */
@@ -270,9 +270,9 @@ body {
 /* Phones (portrait & landscape) */
 @media (max-width: 480px) {
   .card { padding: 1.85rem 1.15rem; border-radius: 16px; }
+  .portrait { width: clamp(120px, 32vw, 160px); height: clamp(120px, 32vw, 160px); }
   .btn-field { gap: 0.85rem; }
-  .btn { width: 100%; max-width: 260px; }
-  #yesBtn, #noBtn { padding: 0.85rem 1.6rem; }
+  #yesBtn, #noBtn { padding: 0.85rem 1.9rem; font-size: clamp(1.05rem, 4vw, 1.3rem); }
   .hd-heart-l { top: 3%; left: 3%; }
   .hd-heart-r { top: 3%; right: 2%; }
   .hd-ribbon { bottom: 3%; left: 3%; }
@@ -293,7 +293,9 @@ body {
 /* Tablets / iPad portrait & landscape */
 @media (min-width: 641px) and (max-width: 1024px) {
   .card { max-width: min(620px, 88vw); padding: 3rem 2.75rem; }
-  .hd-heart-r { width: clamp(200px, 24vw, 280px); }
+  .hd-heart-l { width: clamp(160px, 18vw, 220px); }
+  .hd-heart-r { width: clamp(210px, 25vw, 290px); }
+  .hd-ribbon, .hd-ribbon-2 { width: clamp(150px, 17vw, 210px); }
 }
 
 /* iPad portrait specifically (768px) tends to feel a touch cramped
