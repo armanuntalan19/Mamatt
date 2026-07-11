@@ -91,16 +91,16 @@ body {
 /* ----- Phones: modest, comfortable sizing so the card and text stay
    the focus — decor accents the corners without crowding. ----- */
 @media (max-width: 640px) {
-  .hd-heart-l { width: clamp(120px, 34vw, 170px); top: -2%; left: -6%; --rot: -9deg; }
-  .hd-heart-r { width: clamp(150px, 42vw, 210px); top: -3%; right: -8%; --rot: 11deg; }
-  .hd-ribbon   { width: clamp(115px, 32vw, 160px); left: -6%; bottom: -2%; --rot: 16deg; }
-  .hd-ribbon-2 { width: clamp(115px, 32vw, 160px); right: -6%; bottom: -2%; --rot: -16deg; }
+  .hd-heart-l { width: clamp(90px, 24vw, 130px); top: -2%; left: -5%; --rot: -9deg; }
+  .hd-heart-r { width: clamp(110px, 30vw, 155px); top: -3%; right: -6%; --rot: 11deg; }
+  .hd-ribbon   { width: clamp(85px, 22vw, 120px); left: -5%; bottom: -2%; --rot: 16deg; }
+  .hd-ribbon-2 { width: clamp(85px, 22vw, 120px); right: -5%; bottom: -2%; --rot: -16deg; }
 }
 
 @media (max-width: 380px) {
-  .hd-heart-l { width: clamp(105px, 32vw, 145px); }
-  .hd-heart-r { width: clamp(130px, 38vw, 175px); }
-  .hd-ribbon, .hd-ribbon-2 { width: clamp(100px, 30vw, 140px); }
+  .hd-heart-l { width: clamp(78px, 22vw, 105px); }
+  .hd-heart-r { width: clamp(95px, 26vw, 125px); }
+  .hd-ribbon, .hd-ribbon-2 { width: clamp(75px, 20vw, 100px); }
 }
 
 /* ----- Tablets / iPad: only the gem-chain and one ribbon get the
