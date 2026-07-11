@@ -26,7 +26,7 @@
   width: 100%;
   height: auto;
   display: block;
-  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.12));
+  filter: sepia(0.35) saturate(1.4) hue-rotate(-8deg) drop-shadow(0 2px 5px rgba(0, 0, 0, 0.25));
 }
 
 @keyframes confettiFall {
