@@ -5,7 +5,7 @@
    the provided confetti artwork instead of tulip SVGs.
    ============================================================ */
 
-const CONFETTI_IMAGE = 'images/confetti-piece.png';
+const CONFETTI_IMAGE = 'confetti-piece.png';
 
 // Spawns a balanced field of slowly falling confetti pieces inside
 // `containerSelector`. Each piece gets its own size, rotation,

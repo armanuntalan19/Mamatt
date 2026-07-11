@@ -9,7 +9,7 @@ ribbon photography rather than illustrated artwork.
 - `happy_monthsary.html` + `page3-style.css` + `page3-script.js` — the reveal page shown after Yes is clicked
 - `confetti.js` + `confetti.css` — shared floating confetti effect, used identically by both pages
 - `icon.png` — the pleading-pup icon on the question page
-- `images/` — decorative photos:
+- Decorative photos (all in the project root, alongside the HTML files):
   - `tulip-1.png`, `tulip-2.png`, `tulip-3.png` — tulip bouquet photos, used for the hero bouquet and the corner decor on both pages
   - `heart.png`, `ribbon.png` — used only on the question (index) page, around the hero
   - `confetti-piece.png` — the floating confetti artwork
@@ -44,7 +44,7 @@ ribbon photography rather than illustrated artwork.
 - Edit the copy directly inside `happy_monthsary.html`.
 - Swap `icon.png` for a different image any time — just keep the
   filename, or update the `src`/`href` references in `index.html`.
-- Swap any file in `images/` for a different photo — keep the same
+- Swap any decorative photo for a different one — keep the same
   filename, or update the `src` attributes in `index.html` /
   `happy_monthsary.html`.
 - Confetti count/size/timing live in `spawnConfetti()` in `confetti.js`.
