@@ -39,65 +39,53 @@ body {
   * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
 
-/* ===== HERO DECOR — lace, ribbon & tulip photos (index only) ===== */
+/* ===== HERO DECOR — heart, chain & ribbon photos (index only) =====
+   Tulips are reserved for the falling confetti on this page; the
+   heart, gem chain and ribbon are sized up to anchor all four
+   corners now that the tulip bouquets are gone. */
 .hero-decor .decor-img { --rest-opacity: 0.92; }
 
 .hd-heart-l {
-  width: clamp(70px, 8vw, 108px);
-  top: 5%;
-  left: 5%;
+  width: clamp(120px, 15vw, 210px);
+  top: 4%;
+  left: 3%;
   animation-delay: 0.1s, 0.3s;
   animation-duration: 1s, 6.4s;
-  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.35));
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,0.35));
 }
 .hd-heart-r {
-  width: clamp(90px, 10vw, 140px);
-  top: 6%;
-  right: 4%;
+  width: clamp(170px, 22vw, 300px);
+  top: 4%;
+  right: 2%;
   animation-delay: 0.4s, 1.1s;
   animation-duration: 1s, 7.2s;
-  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.3));
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,0.3));
 }
 .hd-ribbon {
-  width: clamp(46px, 5.6vw, 76px);
-  top: 15%;
-  right: 15%;
+  width: clamp(110px, 15vw, 200px);
+  bottom: 3%;
+  left: 3%;
+  z-index: 1;
   animation-delay: 0.5s, 1.6s;
   animation-duration: 1s, 6.1s;
   --rot: 10deg;
-  display: none;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
 }
-@media (min-width: 640px) { .hd-ribbon { display: block; } }
-
-/* Bottom-corner bouquets — kept softly gold-tinted so the white
-   tulip photography reads warm against the burgundy field. */
-.hd-tulip-1 {
-  width: clamp(150px, 18vw, 250px);
-  bottom: -4%;
-  left: -4%;
+.hd-ribbon-2 {
+  width: clamp(110px, 15vw, 200px);
+  bottom: 3%;
+  right: 3%;
   z-index: 1;
-  animation-delay: 0.1s, 0.9s;
-  animation-duration: 1.1s, 8s;
-  --rot: -5deg;
-  filter: sepia(0.18) saturate(1.15) hue-rotate(-6deg) drop-shadow(0 10px 20px rgba(0,0,0,0.35));
+  animation-delay: 0.3s, 1.2s;
+  animation-duration: 1s, 6.7s;
+  --rot: -10deg;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
 }
-.hd-tulip-2 {
-  width: clamp(150px, 18vw, 250px);
-  bottom: -4%;
-  right: -4%;
-  z-index: 1;
-  animation-delay: 0.2s, 0.4s;
-  animation-duration: 1.1s, 7.4s;
-  --rot: 5deg;
-  filter: sepia(0.18) saturate(1.15) hue-rotate(-6deg) drop-shadow(0 10px 20px rgba(0,0,0,0.35));
-}
-
-.hd-tulip-1, .hd-tulip-2 { animation-name: decorIn, decorFloatWide; }
 
 @media (max-width: 640px) {
-  .hd-tulip-1, .hd-tulip-2 { width: clamp(110px, 26vw, 160px); }
-  .hd-heart-l { width: clamp(52px, 14vw, 76px); }
-  .hd-heart-r { width: clamp(64px, 18vw, 96px); }
+  .hd-heart-l { width: clamp(84px, 22vw, 130px); }
+  .hd-heart-r { width: clamp(110px, 30vw, 180px); }
+  .hd-ribbon, .hd-ribbon-2 { width: clamp(74px, 20vw, 120px); }
 }
 
 /* ===== STAGE — corrugated burgundy backdrop ===== */
@@ -111,7 +99,7 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 0;
+  padding: 2rem 1rem;
 }
 
 /* ===== CARD — cream dotted scrapbook panel ===== */
@@ -132,15 +120,6 @@ body {
   opacity: 0;
   animation: fadeSlideUp 0.9s var(--ease-soft) 0.15s forwards;
 }
-
-.bouquet {
-  width: clamp(120px, 16vw, 170px);
-  height: auto;
-  margin: 0 auto 0.85rem;
-  opacity: 0;
-  animation: scaleIn 0.8s var(--ease-soft) 0.35s forwards, portraitBob 4.2s ease-in-out 1.2s infinite;
-}
-.bouquet img { display: block; width: 100%; height: auto; filter: sepia(0.15) saturate(1.1) hue-rotate(-6deg) drop-shadow(0 10px 20px rgba(51, 8, 26, 0.35)); }
 
 .portrait {
   width: clamp(88px, 15vw, 148px);
@@ -287,6 +266,38 @@ body {
 }
 
 /* ===== RESPONSIVE ===== */
+
+/* Phones (portrait & landscape) */
 @media (max-width: 480px) {
-  .card { padding: 2rem 1.25rem; }
+  .card { padding: 1.85rem 1.15rem; border-radius: 16px; }
+  .btn-field { gap: 0.85rem; }
+  .btn { width: 100%; max-width: 260px; }
+  #yesBtn, #noBtn { padding: 0.85rem 1.6rem; }
+  .hd-heart-l { top: 3%; left: 3%; }
+  .hd-heart-r { top: 3%; right: 2%; }
+  .hd-ribbon { bottom: 3%; left: 3%; }
+  .hd-ribbon-2 { bottom: 3%; right: 3%; }
+}
+
+@media (max-width: 360px) {
+  .card { padding: 1.5rem 0.9rem; }
+  .title { margin-bottom: 1.5rem; }
+}
+
+/* Small phones in landscape — content can exceed viewport height,
+   so let the stage scroll instead of clipping. */
+@media (max-height: 480px) and (orientation: landscape) {
+  .stage { align-items: flex-start; padding-top: 2.5rem; padding-bottom: 2.5rem; }
+}
+
+/* Tablets / iPad portrait & landscape */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .card { max-width: min(620px, 88vw); padding: 3rem 2.75rem; }
+  .hd-heart-r { width: clamp(200px, 24vw, 280px); }
+}
+
+/* iPad portrait specifically (768px) tends to feel a touch cramped
+   at the default clamp ceiling — nudge the card down slightly. */
+@media (min-width: 641px) and (max-width: 820px) and (orientation: portrait) {
+  .card { max-width: 80vw; }
 }

@@ -14,26 +14,20 @@
   <!-- Slow floating confetti, filled in by confetti.js -->
   <div class="tulip-confetti-field" id="confettiField"></div>
 
-  <!-- Hero decor: hearts, ribbon & tulip photos — index page only.
-       Two tulip bouquets anchor the bottom corners, hearts frame the
-       top corners, one ribbon accents the top edge. tulip-2's source
-       photo is cropped on its left side, so it's mirrored (scaleX(-1))
-       and always kept on the right, where the cropped edge bleeds
-       off-screen instead of showing. -->
+  <!-- Hero decor: hearts, ribbon & gem chain — index page only.
+       No tulip photos here (those are reserved for the falling
+       confetti); heart and chain anchor the top corners, ribbon
+       accents the top edge, all sized up to fill the space the
+       tulips used to occupy. -->
   <div class="decor-layer hero-decor" id="decorLayer" aria-hidden="true">
     <div class="decor-img hd-heart-l"><img src="lace-heart.svg" alt="" /></div>
     <div class="decor-img hd-heart-r"><div class="img-flip"><img src="gem-chain.svg" alt="" /></div></div>
     <div class="decor-img hd-ribbon"><img src="ribbon.png" alt="" /></div>
-    <div class="decor-img hd-tulip-1"><img src="tulip-1.png" alt="" /></div>
-    <div class="decor-img hd-tulip-2"><div class="img-flip"><img src="tulip-2.png" alt="" /></div></div>
+    <div class="decor-img hd-ribbon-2"><div class="img-flip"><img src="ribbon.png" alt="" /></div></div>
   </div>
 
   <main class="stage">
     <div class="card">
-
-      <div class="bouquet" aria-hidden="true">
-        <img src="tulip-3.png" alt="" />
-      </div>
 
       <img src="icon.png" alt="A pleading pup, hoping for a yes" class="portrait" />
 
