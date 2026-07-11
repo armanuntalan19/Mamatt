@@ -11,19 +11,26 @@
 </head>
 <body>
 
-  <!-- Falling tulip petals, filled in by confetti.js -->
+  <!-- Slow floating confetti, filled in by confetti.js -->
   <div class="tulip-confetti-field" id="confettiField"></div>
 
-  <!-- Fixed corner tulips — quiet ambient framing -->
-  <div class="tulip-float tf-1" aria-hidden="true"></div>
-  <div class="tulip-float tf-2" aria-hidden="true"></div>
-  <div class="tulip-float tf-3" aria-hidden="true"></div>
-  <div class="tulip-float tf-4" aria-hidden="true"></div>
+  <!-- Hero decor: hearts, ribbon & tulip photos — index page only -->
+  <div class="decor-layer hero-decor" id="decorLayer" aria-hidden="true">
+    <div class="decor-img hd-heart-l"><img src="images/heart.png" alt="" /></div>
+    <div class="decor-img hd-heart-r"><img src="images/heart.png" alt="" /></div>
+    <div class="decor-img hd-ribbon-l"><img src="images/ribbon.png" alt="" /></div>
+    <div class="decor-img hd-ribbon-r"><img src="images/ribbon.png" alt="" /></div>
+    <div class="decor-img hd-tulip-1"><img src="images/tulip-1.png" alt="" /></div>
+    <div class="decor-img hd-tulip-2"><img src="images/tulip-2.png" alt="" /></div>
+    <div class="decor-img hd-tulip-3"><img src="images/tulip-3.png" alt="" /></div>
+  </div>
 
   <main class="stage">
     <div class="card">
 
-      <div class="bouquet" aria-hidden="true" id="bouquet"></div>
+      <div class="bouquet" aria-hidden="true">
+        <img src="images/tulip-3.png" alt="" />
+      </div>
 
       <img src="icon.png" alt="A pleading pup, hoping for a yes" class="portrait" />
 

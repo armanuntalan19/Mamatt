@@ -24,34 +24,25 @@ const NO_MESSAGES = [
   'Okay, no', 'Absolutely not', 'No comment', 'Unlimited no'
 ];
 
-// ── DECORATIVE TULIPS (bouquet + fixed corner tulips) ─────────
-// Uses the same realistic tulip bloom (window.tulipSVG, from
-// confetti.js) with the same colors, sizes, and corner positions
-// as the Happy Monthsary page, so both pages match exactly.
-function renderDecor() {
-  const bouquet = document.getElementById('bouquet');
-  if (bouquet && window.tulipSVG) {
-    const stems = [
-      { color: '#e7b567', size: 56 },
-      { color: '#f3a6c4', size: 76 },
-      { color: '#ef6351', size: 56 },
-    ];
-    stems.forEach(s => {
-      const wrap = document.createElement('div');
-      wrap.style.width = s.size + 'px';
-      wrap.innerHTML = window.tulipSVG(s.color);
-      bouquet.appendChild(wrap);
-    });
-  }
+// ── GENTLE PARALLAX ─────────────────────────────────────────
+// The decorative hero layer (hearts/ribbon/tulip photos) drifts a
+// touch slower than the cursor for a soft sense of depth. Purely
+// additive to each element's own floating animation — this only
+// moves the shared wrapper, never the individual keyframes.
+function initParallax() {
+  const layer = document.getElementById('decorLayer');
+  if (!layer || window.matchMedia('(pointer: coarse)').matches) return;
 
-  // Corner floating tulips
-  const corners = document.querySelectorAll('.tulip-float');
-  if (window.tulipSVG) {
-    const cornerColors = ['#f3a6c4', '#e7b567', '#ef6351', '#d81159'];
-    corners.forEach((el, i) => {
-      el.innerHTML = window.tulipSVG(cornerColors[i % cornerColors.length]);
+  let raf = null;
+  window.addEventListener('mousemove', (e) => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 2;
+      const y = (e.clientY / window.innerHeight - 0.5) * 2;
+      layer.style.transform = `translate(${x * -10}px, ${y * -8}px)`;
+      raf = null;
     });
-  }
+  });
 }
 
 // ── YES / NO LOGIC ────────────────────────────────────────────
@@ -168,7 +159,7 @@ function updateNo(noBtn, n) {
 
 // ── BOOT ───────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  renderDecor();
-  if (window.spawnTulipConfetti) window.spawnTulipConfetti('#confettiField', 26);
+  if (window.spawnConfetti) window.spawnConfetti('#confettiField', 16);
+  initParallax();
   initButtons();
 });

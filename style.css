@@ -19,6 +19,7 @@
   --leaf:    #3a6b4c;
   --blush:   #f7e6e6;
   --cream:   #fffaf5;
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 html, body {
@@ -33,31 +34,82 @@ body {
   overflow-y: auto;
 }
 
-/* ===== AMBIENT CORNER TULIPS ===== */
-.tulip-float {
-  position: fixed;
-  pointer-events: none;
-  z-index: 2;
-  width: 46px;
-  opacity: 0.55;
-  animation: tulipDrift 6s ease-in-out infinite;
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
-.tulip-float svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.tf-1 { top: 6%;  left: 3%;  animation-delay: 0s;   animation-duration: 5.5s; }
-.tf-2 { top: 12%; right: 4%; animation-delay: 1s;   animation-duration: 7s;   width: 36px; }
-.tf-3 { bottom: 10%; left: 4%; animation-delay: 2s; animation-duration: 6.2s; width: 40px; }
-.tf-4 { bottom: 6%; right: 5%; animation-delay: 0.6s; animation-duration: 6.8s; width: 34px; }
 
-@keyframes tulipDrift {
-  0%   { transform: translateY(0px) rotate(-6deg); }
-  30%  { transform: translateY(-12px) rotate(4deg); }
-  60%  { transform: translateY(-4px) rotate(-3deg); }
-  100% { transform: translateY(0px) rotate(-6deg); }
+/* ===== HERO DECOR — hearts, ribbon & tulip photos (index only) =====
+   Positioned around the hero card for a welcoming first impression.
+   .decor-layer / .decor-img / decorFloat keyframes are shared with
+   confetti.css; only placement is page-specific here. */
+.hero-decor .decor-img { --rest-opacity: 0.92; }
+
+.hd-heart-l {
+  width: clamp(46px, 6.4vw, 78px);
+  top: 9%;
+  left: 6%;
+  animation-delay: 0.1s, 0.3s;
+  animation-duration: 1s, 6.4s;
 }
+.hd-heart-r {
+  width: clamp(36px, 5vw, 60px);
+  top: 16%;
+  right: 8%;
+  animation-delay: 0.4s, 1.1s;
+  animation-duration: 1s, 7.2s;
+}
+.hd-ribbon-l {
+  width: clamp(52px, 7vw, 88px);
+  bottom: 8%;
+  left: 5%;
+  animation-delay: 0.2s, 0.7s;
+  animation-duration: 1s, 6.9s;
+  transform: rotate(-8deg);
+}
+.hd-ribbon-r {
+  width: clamp(40px, 5.6vw, 68px);
+  top: 10%;
+  right: 20%;
+  animation-delay: 0.5s, 1.6s;
+  animation-duration: 1s, 6.1s;
+  transform: rotate(10deg);
+  display: none;
+}
+@media (min-width: 720px) { .hd-ribbon-r { display: block; } }
+
+.hd-tulip-1 {
+  width: clamp(120px, 15vw, 210px);
+  bottom: -3%;
+  left: -3%;
+  z-index: 1;
+  animation-delay: 0.1s, 0.9s;
+  animation-duration: 1.1s, 8s;
+  --rot: -6deg;
+}
+.hd-tulip-2 {
+  width: clamp(110px, 14vw, 190px);
+  bottom: -4%;
+  right: -2%;
+  z-index: 1;
+  animation-delay: 0.2s, 0.4s;
+  animation-duration: 1.1s, 7.4s;
+  --rot: 7deg;
+}
+.hd-tulip-3 {
+  width: clamp(70px, 9vw, 118px);
+  top: 4%;
+  right: 4%;
+  z-index: 1;
+  animation-delay: 0.3s, 1.3s;
+  animation-duration: 1.1s, 6.6s;
+  --rot: 9deg;
+  display: none;
+}
+@media (min-width: 560px) { .hd-tulip-3 { display: block; } }
+
+/* Use the wide float arc for the two big corner bouquets so their
+   motion reads differently from the small hearts/ribbon. */
+.hd-tulip-1, .hd-tulip-2 { animation-name: decorIn, decorFloatWide; }
 
 /* ===== STAGE ===== */
 .stage {
@@ -75,25 +127,25 @@ body {
 /* ===== CARD ===== */
 .card {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   text-align: center;
   max-width: min(700px, 92vw);
   width: 100%;
   margin: 0 auto;
   border-radius: 32px;
   padding: 0;
+  opacity: 0;
+  animation: fadeSlideUp 0.9s var(--ease-soft) 0.15s forwards;
 }
 
 .bouquet {
-  width: clamp(140px, 18vw, 190px);
-  height: clamp(90px, 12vw, 122px);
-  margin: 0 auto 0.75rem;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 4px;
+  width: clamp(120px, 16vw, 170px);
+  height: auto;
+  margin: 0 auto 0.85rem;
+  opacity: 0;
+  animation: scaleIn 0.8s var(--ease-soft) 0.35s forwards, portraitBob 4.2s ease-in-out 1.2s infinite;
 }
-.bouquet svg { display: block; width: 100%; height: auto; }
+.bouquet img { display: block; width: 100%; height: auto; filter: drop-shadow(0 10px 20px rgba(43, 19, 32, 0.18)); }
 
 .portrait {
   width: clamp(88px, 15vw, 148px);
@@ -101,12 +153,25 @@ body {
   object-fit: contain;
   display: block;
   margin: 0 auto 1.1rem;
-  animation: portraitBob 2.6s ease-in-out infinite;
+  opacity: 0;
+  animation: scaleIn 0.8s var(--ease-soft) 0.2s forwards, portraitBob 2.6s ease-in-out 1s infinite;
+  transition: transform 0.35s var(--ease-soft);
 }
+.portrait:hover { transform: scale(1.06) rotate(-2deg); }
 
 @keyframes portraitBob {
   0%, 100% { transform: translateY(0) rotate(-1.5deg); }
   50%       { transform: translateY(-7px) rotate(1.5deg); }
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
 .eyebrow {
@@ -115,6 +180,8 @@ body {
   color: var(--crimson);
   letter-spacing: 0.01em;
   margin-bottom: 0.35rem;
+  opacity: 0;
+  animation: fadeSlideUp 0.7s var(--ease-soft) 0.4s forwards;
 }
 
 .title {
@@ -124,6 +191,8 @@ body {
   color: var(--plum);
   line-height: 1.22;
   margin-bottom: 2.1rem;
+  opacity: 0;
+  animation: fadeSlideUp 0.8s var(--ease-soft) 0.5s forwards;
 }
 .title em {
   font-style: italic;
@@ -147,6 +216,8 @@ body {
   justify-content: center;
   gap: 1.25rem;
   flex-wrap: wrap;
+  opacity: 0;
+  animation: scaleIn 0.7s var(--ease-soft) 0.7s forwards;
 }
 
 .btn {
@@ -171,14 +242,15 @@ body {
               border-radius 0.55s ease,
               box-shadow 0.4s ease,
               background 0.25s ease,
+              transform 0.3s var(--ease-soft),
               top 0.55s cubic-bezier(0.34, 1.1, 0.4, 1),
               left 0.55s cubic-bezier(0.34, 1.1, 0.4, 1);
 }
 
 #yesBtn:hover {
   background: linear-gradient(135deg, var(--crimson), var(--coral) 60%, #f78c6c);
-  box-shadow: 0 14px 38px -8px rgba(216, 17, 89, 0.65);
-  transform: scale(1.04);
+  box-shadow: 0 16px 42px -8px rgba(216, 17, 89, 0.65);
+  transform: scale(1.045) translateY(-2px);
 }
 
 #yesBtn.yes-fixed {
@@ -229,5 +301,4 @@ body {
 /* ===== RESPONSIVE ===== */
 @media (max-width: 480px) {
   .card { padding: 0; }
-  .tulip-float { display: none; }
-}s
+}

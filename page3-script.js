@@ -1,37 +1,27 @@
 /* ============================================================
    page3-script.js — decorative setup for the Monthsary page.
-   Uses the same falling-tulip confetti mechanics as the question
-   page, but real tulip colors (yellow, orange, purple, red)
-   instead of the index page's pink/crimson.
+   Uses the same falling-confetti mechanics as the question page.
+   Tulip photo decor only — no hearts or ribbons here, matching
+   page3-style.css.
    ============================================================ */
 
+function initParallax() {
+  const layer = document.getElementById('decorLayer');
+  if (!layer || window.matchMedia('(pointer: coarse)').matches) return;
+
+  let raf = null;
+  window.addEventListener('mousemove', (e) => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 2;
+      const y = (e.clientY / window.innerHeight - 0.5) * 2;
+      layer.style.transform = `translate(${x * -10}px, ${y * -8}px)`;
+      raf = null;
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  // Real tulip colors — yellow, orange, purple, red — distinct from
-  // the index page's pink/crimson bouquet.
-  const palette = window.MONTHSARY_PALETTE || ['#f7ca18', '#f39c12', '#8e44ad', '#c0392b', '#6c3483'];
-
-  if (window.spawnTulipConfetti) window.spawnTulipConfetti('#confettiField', 26, palette);
-
-  const bouquet = document.getElementById('bouquet');
-  if (bouquet && window.tulipSVG) {
-    const stems = [
-      { color: '#f7ca18', size: 56 },
-      { color: '#8e44ad', size: 76 },
-      { color: '#f39c12', size: 56 },
-    ];
-    stems.forEach(s => {
-      const wrap = document.createElement('div');
-      wrap.style.width = s.size + 'px';
-      wrap.innerHTML = window.tulipSVG(s.color);
-      bouquet.appendChild(wrap);
-    });
-  }
-
-  const corners = document.querySelectorAll('.tulip-float');
-  if (window.tulipSVG) {
-    const cornerColors = ['#f39c12', '#f7ca18', '#6c3483', '#c0392b'];
-    corners.forEach((el, i) => {
-      el.innerHTML = window.tulipSVG(cornerColors[i % cornerColors.length]);
-    });
-  }
+  if (window.spawnConfetti) window.spawnConfetti('#confettiField', 16);
+  initParallax();
 });

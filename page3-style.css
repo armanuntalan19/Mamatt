@@ -1,6 +1,8 @@
 /* ============================================================
    page3-style.css — "Happy Monthsary" reveal page
-   Same type and confetti as the question page, in shades of pink.
+   Same type and confetti field as the question page, in shades
+   of pink. Tulip photo decorations only — no hearts or ribbons
+   on this page, by design.
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400;1,600&family=Caveat:wght@500;700&family=Work+Sans:wght@400;500;600&display=swap');
@@ -19,6 +21,7 @@
   --rose:     #f6a8c0;
   --hotpink:  #e23f7b;
   --deeppink: #93275f;
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 html, body {
@@ -28,27 +31,46 @@ html, body {
   height: 100%;
 }
 
-/* ===== AMBIENT CORNER TULIPS (identical positions to index) ===== */
-.tulip-float {
-  position: fixed;
-  pointer-events: none;
-  z-index: 2;
-  width: 46px;
-  opacity: 0.55;
-  animation: tulipDrift 6s ease-in-out infinite;
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
-.tulip-float svg { display: block; width: 100%; height: auto; }
-.tf-1 { top: 6%;  left: 3%;  animation-delay: 0s;   animation-duration: 5.5s; }
-.tf-2 { top: 12%; right: 4%; animation-delay: 1s;   animation-duration: 7s;   width: 36px; }
-.tf-3 { bottom: 10%; left: 4%; animation-delay: 2s; animation-duration: 6.2s; width: 40px; }
-.tf-4 { bottom: 6%; right: 5%; animation-delay: 0.6s; animation-duration: 6.8s; width: 34px; }
 
-@keyframes tulipDrift {
-  0%   { transform: translateY(0px) rotate(-6deg); }
-  30%  { transform: translateY(-12px) rotate(4deg); }
-  60%  { transform: translateY(-4px) rotate(-3deg); }
-  100% { transform: translateY(0px) rotate(-6deg); }
+/* ===== HERO DECOR — tulip photos only (no hearts/ribbons here) =====
+   Different combination/placement than the index page so each
+   page reads as its own moment. */
+.hero-decor .decor-img { --rest-opacity: 0.92; }
+
+.hd-tulip-1 {
+  width: clamp(120px, 15vw, 200px);
+  top: -3%;
+  left: -3%;
+  z-index: 1;
+  animation-delay: 0.1s, 0.6s;
+  animation-duration: 1.1s, 7.8s;
+  --rot: 8deg;
 }
+.hd-tulip-2 {
+  width: clamp(120px, 15vw, 205px);
+  bottom: -4%;
+  right: -3%;
+  z-index: 1;
+  animation-delay: 0.2s, 1s;
+  animation-duration: 1.1s, 8.4s;
+  --rot: -7deg;
+}
+.hd-tulip-3 {
+  width: clamp(66px, 8.6vw, 112px);
+  bottom: 6%;
+  left: 6%;
+  z-index: 1;
+  animation-delay: 0.35s, 0.5s;
+  animation-duration: 1.1s, 6.4s;
+  --rot: -9deg;
+  display: none;
+}
+@media (min-width: 560px) { .hd-tulip-3 { display: block; } }
+
+.hd-tulip-1, .hd-tulip-2 { animation-name: decorIn, decorFloatWide; }
 
 /* ===== PAGE — shades of pink, matching the question page's family ===== */
 #page3 {
@@ -64,23 +86,38 @@ html, body {
 
 .p3-inner {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   max-width: min(760px, 92vw);
   text-align: center;
   margin: 0 auto;
   padding: 0 1.5rem;
+  opacity: 0;
+  animation: fadeSlideUp 0.9s var(--ease-soft) 0.15s forwards;
 }
 
 .bouquet {
-  width: clamp(140px, 18vw, 190px);
-  height: clamp(90px, 12vw, 122px);
-  margin: 0 auto 0.75rem;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 4px;
+  width: clamp(120px, 16vw, 170px);
+  height: auto;
+  margin: 0 auto 0.85rem;
+  opacity: 0;
+  animation: scaleIn 0.8s var(--ease-soft) 0.35s forwards, portraitBob 4.2s ease-in-out 1.2s infinite;
 }
-.bouquet svg { display: block; width: 100%; height: auto; }
+.bouquet img { display: block; width: 100%; height: auto; filter: drop-shadow(0 10px 20px rgba(147, 39, 95, 0.22)); }
+
+@keyframes portraitBob {
+  0%, 100% { transform: translateY(0) rotate(-1.5deg); }
+  50%       { transform: translateY(-7px) rotate(1.5deg); }
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
 
 .p3-title {
   font-family: 'Fraunces', serif;
@@ -91,6 +128,8 @@ html, body {
   text-shadow: 0 4px 24px rgba(147, 39, 95, 0.18);
   line-height: 1.2;
   margin-bottom: 0.4rem;
+  opacity: 0;
+  animation: fadeSlideUp 0.8s var(--ease-soft) 0.45s forwards;
 }
 
 .p3-months {
@@ -101,6 +140,8 @@ html, body {
   line-height: 1;
   text-shadow: 0 0 40px rgba(216, 17, 89, 0.25);
   margin-bottom: 1.1rem;
+  opacity: 0;
+  animation: scaleIn 0.8s var(--ease-soft) 0.6s forwards;
 }
 
 .p3-sub {
@@ -108,12 +149,9 @@ html, body {
   font-size: clamp(1rem, 1.8vw, 1.2rem);
   font-weight: 400;
   color: var(--deeppink);
-  opacity: 0.92;
+  opacity: 0;
   max-width: 480px;
   margin: 0 auto;
   line-height: 1.6;
-}
-
-@media (max-width: 480px) {
-  .tulip-float { display: none; }
+  animation: fadeSlideUp 0.8s var(--ease-soft) 0.8s forwards;
 }

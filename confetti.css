@@ -1,9 +1,9 @@
 /* ============================================================
-   confetti.css — shared falling-tulip effect
-   Loaded by both index.html and happy_monthsary.html so the
-   confetti looks and behaves exactly the same on each page.
+   confetti.css — shared floating confetti + decorative motion
+   Loaded by both index.html and happy_monthsary.html.
    ============================================================ */
 
+/* ---------- Falling image confetti ---------- */
 .tulip-confetti-field {
   position: fixed;
   inset: 0;
@@ -12,30 +12,75 @@
   z-index: 1;
 }
 
-.tulip-petal {
+.confetti-piece {
   position: absolute;
-  top: -64px;
+  top: -80px;
   opacity: 0;
-  animation-name: tulipFall;
-  animation-timing-function: linear;
+  animation-name: confettiFall;
+  animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   will-change: transform, opacity;
 }
 
-.tulip-petal svg {
+.confetti-piece img {
   width: 100%;
   height: auto;
   display: block;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.12));
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.12));
 }
 
-@keyframes tulipFall {
-  0%   { transform: translate(0, 0) rotate(0deg); opacity: 0; }
-  8%   { opacity: 0.9; }
-  90%  { opacity: 0.55; }
-  100% { transform: translate(var(--drift), 118vh) rotate(var(--rot)); opacity: 0; }
+@keyframes confettiFall {
+  0%   { transform: translate(0, 0) rotate(var(--rot-start)); opacity: 0; }
+  10%  { opacity: var(--peak-opacity); }
+  50%  { transform: translate(var(--drift), 55vh) rotate(var(--rot-mid)); }
+  88%  { opacity: var(--peak-opacity); }
+  100% { transform: translate(calc(var(--drift) * 1.6), 118vh) rotate(var(--rot-end)); opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tulip-petal { animation: none; opacity: 0; }
+  .confetti-piece { animation: none; opacity: 0; }
+}
+
+/* ---------- Shared floating motion for decorative art ---------- */
+.decor-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  transition: transform 0.35s ease-out;
+}
+
+.decor-img {
+  position: absolute;
+  display: block;
+  filter: drop-shadow(0 8px 18px rgba(43, 19, 32, 0.16));
+  opacity: 0;
+  animation: decorIn 1s ease forwards, decorFloat 7s ease-in-out infinite;
+}
+
+.decor-img img { width: 100%; height: auto; display: block; }
+
+@keyframes decorIn {
+  from { opacity: 0; }
+  to   { opacity: var(--rest-opacity, 1); }
+}
+
+/* Two float variants with different arcs/timings so nothing
+   moves in sync with anything else on the page. */
+@keyframes decorFloat {
+  0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+  50%      { transform: translateY(-14px) rotate(calc(var(--rot, 0deg) * -1)); }
+}
+
+@keyframes decorFloatWide {
+  0%, 100% { transform: translate(0, 0) rotate(var(--rot, 0deg)); }
+  50%      { transform: translate(6px, -20px) rotate(calc(var(--rot, 0deg) * -1)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .decor-img { animation: decorIn 1s ease forwards; }
+}
+
+@media (max-width: 480px) {
+  .decor-layer { display: none; }
 }
