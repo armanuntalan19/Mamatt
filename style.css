@@ -71,11 +71,22 @@ body {
   --rot: 10deg;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
 }
+.hd-ribbon-2 {
+  width: clamp(110px, 15vw, 200px);
+  bottom: 3%;
+  right: 3%;
+  z-index: 1;
+  animation-delay: 0.3s, 1.2s;
+  animation-duration: 1s, 6.7s;
+  --rot: -10deg;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+}
 
 @media (max-width: 640px) {
-  .hd-heart-l { width: clamp(110px, 30vw, 170px); }
-  .hd-heart-r { width: clamp(150px, 40vw, 230px); }
-  .hd-ribbon, .hd-ribbon-2 { width: clamp(100px, 28vw, 160px); }
+  .hd-heart-l { width: clamp(180px, 52vw, 260px); top: -2%; left: -9%; }
+  .hd-heart-r { width: clamp(230px, 66vw, 340px); top: -3%; right: -12%; }
+  .hd-ribbon { width: clamp(170px, 50vw, 250px); left: -9%; bottom: -3%; }
+  .hd-ribbon-2 { width: clamp(170px, 50vw, 250px); right: -9%; bottom: -3%; }
 }
 
 /* ===== STAGE — corrugated burgundy backdrop ===== */
@@ -260,7 +271,7 @@ body {
 /* Phones (portrait & landscape) */
 @media (max-width: 480px) {
   .card { padding: 1.85rem 1.15rem; border-radius: 16px; }
-  .portrait { width: clamp(120px, 32vw, 160px); height: clamp(120px, 32vw, 160px); }
+  .portrait { width: clamp(130px, 36vw, 170px); height: clamp(130px, 36vw, 170px); }
   .btn-field { gap: 0.85rem; }
   #yesBtn, #noBtn { padding: 0.85rem 1.9rem; font-size: clamp(1.05rem, 4vw, 1.3rem); }
   .hd-heart-l { top: 3%; left: 3%; }
@@ -283,9 +294,10 @@ body {
 /* Tablets / iPad portrait & landscape */
 @media (min-width: 641px) and (max-width: 1024px) {
   .card { max-width: min(620px, 88vw); padding: 3rem 2.75rem; }
-  .hd-heart-l { width: clamp(160px, 18vw, 220px); }
-  .hd-heart-r { width: clamp(210px, 25vw, 290px); }
-  .hd-ribbon, .hd-ribbon-2 { width: clamp(150px, 17vw, 210px); }
+  .hd-heart-l { width: clamp(220px, 26vw, 300px); top: 0%; left: -4%; }
+  .hd-heart-r { width: clamp(280px, 34vw, 380px); top: -1%; right: -6%; }
+  .hd-ribbon { width: clamp(200px, 24vw, 280px); left: -4%; bottom: -1%; }
+  .hd-ribbon-2 { width: clamp(200px, 24vw, 280px); right: -4%; bottom: -1%; }
 }
 
 /* iPad portrait specifically (768px) tends to feel a touch cramped
