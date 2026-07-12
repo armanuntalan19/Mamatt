@@ -28,6 +28,7 @@ html, body {
   font-family: 'Work Sans', sans-serif;
   color: var(--cream);
   height: 100%;
+  background-color: var(--maroon-deep);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -135,11 +136,6 @@ html, body {
   margin: 0 auto;
   padding: clamp(2.2rem, 5vw, 3.2rem) clamp(1.5rem, 5vw, 2.5rem);
   border-radius: 18px;
-  background-color: var(--cream);
-  background-image: radial-gradient(rgba(92, 18, 38, 0.16) 1px, transparent 1.4px);
-  background-size: 15px 15px;
-  border: 1px solid rgba(92, 18, 38, 0.18);
-  box-shadow: 0 24px 60px -18px rgba(0, 0, 0, 0.55);
   opacity: 0;
   animation: fadeSlideUp 0.9s var(--ease-soft) 0.15s forwards;
 }
@@ -173,7 +169,7 @@ html, body {
   font-weight: 600;
   font-style: italic;
   font-size: clamp(2.2rem, 7vw, 4.75rem);
-  color: var(--maroon-deep);
+  color: var(--cream);
   line-height: 1.2;
   margin-bottom: 0.4rem;
   opacity: 0;
@@ -184,7 +180,7 @@ html, body {
   font-family: 'Parisienne', cursive;
   font-weight: 400;
   font-size: clamp(3rem, 9vw, 6rem);
-  color: var(--maroon-mid);
+  color: var(--gold);
   line-height: 1;
   margin-bottom: 1.1rem;
   opacity: 0;
@@ -195,7 +191,7 @@ html, body {
   font-family: 'Parisienne', cursive;
   font-size: clamp(1rem, 1.8vw, 1.15rem);
   font-weight: 400;
-  color: var(--maroon-mid);
+  color: var(--gold);
   opacity: 0;
   max-width: 480px;
   margin: 0 auto;
