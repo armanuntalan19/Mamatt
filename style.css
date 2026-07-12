@@ -28,6 +28,7 @@ html, body {
   font-family: 'Work Sans', sans-serif;
   color: var(--ink);
   height: 100%;
+  background-color: var(--maroon-deep);
 }
 
 body {
@@ -143,11 +144,6 @@ body {
   margin: 0 auto;
   border-radius: 18px;
   padding: clamp(2.2rem, 5vw, 3.2rem) clamp(1.5rem, 5vw, 2.5rem);
-  background-color: var(--cream);
-  background-image: radial-gradient(rgba(92, 18, 38, 0.16) 1px, transparent 1.4px);
-  background-size: 15px 15px;
-  border: 1px solid rgba(92, 18, 38, 0.18);
-  box-shadow: 0 24px 60px -18px rgba(0, 0, 0, 0.55);
   opacity: 0;
   animation: fadeSlideUp 0.9s var(--ease-soft) 0.15s forwards;
 }
@@ -182,7 +178,7 @@ body {
 .eyebrow {
   font-family: 'Parisienne', cursive;
   font-size: clamp(1.6rem, 3.2vw, 2.1rem);
-  color: var(--maroon-mid);
+  color: var(--gold);
   letter-spacing: 0.01em;
   margin-bottom: 0.35rem;
   opacity: 0;
@@ -193,7 +189,7 @@ body {
   font-family: 'Fraunces', serif;
   font-weight: 600;
   font-size: clamp(2.1rem, 5.5vw, 3.75rem);
-  color: var(--maroon-deep);
+  color: var(--ink);
   line-height: 1.22;
   margin-bottom: 2.1rem;
   opacity: 0;
@@ -203,7 +199,7 @@ body {
   font-family: 'Parisienne', cursive;
   font-style: normal;
   font-size: 1.15em;
-  color: var(--maroon-mid);
+  color: var(--gold);
 }
 
 /* ===== BUTTONS ===== */
